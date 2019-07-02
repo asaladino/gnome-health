@@ -1,0 +1,7 @@
+data/com.codingsimply.gnome.health.desktop.in
+data/com.codingsimply.gnome.health.appdata.xml.in
+data/com.codingsimply.gnome.health.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
