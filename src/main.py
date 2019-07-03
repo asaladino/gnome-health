@@ -13,7 +13,7 @@ if script_dir.endswith('src'):
 
 from gi.repository import Gio
 
-resource = Gio.resource_load(join(script_dir, add_src, 'gnome-health.gresource'))
+resource = Gio.resource_load(join(script_dir, add_src, 'resources', 'gnome-health.gresource'))
 # noinspection PyProtectedMember
 Gio.Resource._register(resource)
 

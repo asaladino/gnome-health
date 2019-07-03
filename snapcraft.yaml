@@ -1,0 +1,21 @@
+name: gnome-health
+version: git
+summary: Gnome Health
+description: |
+  A health data monitoring app for gnome. Organize and collect all
+  your health data into one location.
+base: core18
+confinement: devmode
+
+
+parts:
+  gnome-health:
+    plugin: python
+    python-version: python3
+    source: .
+    stage-packages:
+      - python-six
+
+apps:
+  gnome-health:
+    command: gnome-health.py
