@@ -2,6 +2,7 @@ from xml.dom import minidom
 
 from src.data.model.Me import Me
 from src.data.model.Record import Record
+from src.data.model.Gender import Gender
 
 
 class RecordsAppleHealthXmlRepository:
@@ -18,8 +19,9 @@ class RecordsAppleHealthXmlRepository:
         if len(mrs) > 0:
             r = mrs[0]
             me = Me()
-            me.birth = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierDateOfBirth')
-            me.biological_sex = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierBiologicalSex')
+            me.set_birth(self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierDateOfBirth'))
+            gender = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierBiologicalSex')
+            me.biological_gender = self._get_gender(gender)
             me.blood_type = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierBloodType')
             me.fitzpatrick_skin_type = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierFitzpatrickSkinType')
             return me
@@ -40,6 +42,14 @@ class RecordsAppleHealthXmlRepository:
             record.value = self._get_attribute_value(r, 'value')
             result.append(record)
         return result
+
+    @staticmethod
+    def _get_gender(gender):
+        if gender == "HKBiologicalSexMale":
+            return Gender.MALE
+        if gender == "HKBiologicalSexFemale":
+            return Gender.MALE
+        return Gender.OTHER
 
     @staticmethod
     def _get_attribute_value(record, attribute):

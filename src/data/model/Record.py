@@ -5,10 +5,10 @@ from src.data.model import consts
 
 class Record:
     def __init__(self):
-        self.type = ''
-        self.source_name = ''
-        self.source_version = ''
-        self.unit = ''
+        self.type = None
+        self.source_name = None
+        self.source_version = None
+        self.unit = None
         self.created = None
         self.start = None
         self.end = None
