@@ -45,6 +45,12 @@ class RecordsAppleHealthXmlRepository:
 
     @staticmethod
     def _get_gender(gender):
+        """
+        Get the gender based on apple developer enum
+        https://developer.apple.com/documentation/healthkit/hkbiologicalsex?language=objc
+        :param gender: as apple text representation.
+        :return: Gender
+        """
         if gender == "HKBiologicalSexMale":
             return Gender.MALE
         if gender == "HKBiologicalSexFemale":
