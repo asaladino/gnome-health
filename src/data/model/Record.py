@@ -4,15 +4,18 @@ from src.data.model import consts
 
 
 class Record:
-    def __init__(self):
-        self.type = None
-        self.source_name = None
-        self.source_version = None
-        self.unit = None
-        self.created = None
-        self.start = None
-        self.end = None
-        self.value = 0
+    type = str
+    source_name = str
+    source_version = str
+    unit = str
+    created = datetime
+    start = datetime
+    end = datetime
+    value = int
+
+    def copy_from_object(self, obj):
+        for att in obj.__dict__:
+            self.__setattr__(att, obj.__getattribute__(att))
 
     def set_created(self, start):
         self.created = datetime.strptime(start, consts.date_time_format)

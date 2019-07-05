@@ -1,7 +1,7 @@
 import unittest
 
-from tests.TestRecord import TestRecord
-from tests.TestRecordsAppleHealthXmlRepository import TestRecordsAppleHealthXmlRepository
+from tests.data.model.test_record import TestRecord
+from tests.data.repository.test_recordsAppleHealthXmlRepository import TestRecordsAppleHealthXmlRepository
 
 
 def suite():

@@ -3,6 +3,7 @@ from enum import Enum, unique
 
 @unique
 class Gender(Enum):
-    OTHER = 0
-    MALE = 1
-    FEMALE = 2
+    NOT_SET = 0
+    OTHER = 1
+    MALE = 2
+    FEMALE = 3

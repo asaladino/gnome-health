@@ -6,9 +6,9 @@ from src.data.model.Gender import Gender
 
 
 class RecordsAppleHealthXmlRepository:
+    data = None
 
     def __init__(self, location):
-        self.data = None
         self.location = location
 
     def load_data(self):
@@ -51,6 +51,8 @@ class RecordsAppleHealthXmlRepository:
         :param gender: as apple text representation.
         :return: Gender
         """
+        if gender == "HKBiologicalSexNotSet":
+            return Gender.NOT_SET
         if gender == "HKBiologicalSexMale":
             return Gender.MALE
         if gender == "HKBiologicalSexFemale":
