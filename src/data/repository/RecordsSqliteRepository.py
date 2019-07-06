@@ -21,12 +21,19 @@ class RecordsSqliteRepository:
         record_sql = Record()
         record_sql.copy_from_object(record)
         commit()
+        return record_sql
 
-    def read(self):
-        pass
+    @staticmethod
+    @db_session
+    def read(record_id):
+        return Record[record_id]
 
+    @staticmethod
+    @db_session
     def update(self):
         pass
 
+    @staticmethod
+    @db_session
     def delete(self):
         pass
