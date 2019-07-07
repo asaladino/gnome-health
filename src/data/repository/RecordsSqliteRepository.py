@@ -1,39 +1,29 @@
-from pony.orm import Database, PrimaryKey, db_session, commit
-
-from src.data.model.Record import Record as RecordModel
-
-db = Database()
-db.bind(provider='sqlite', filename=':memory:')
-
-
-class Record(RecordModel, db.Entity):
-    id = PrimaryKey(int, auto=True)
-
-
-db.generate_mapping(create_tables=True)
+from src.data.model.Record import Record
 
 
 class RecordsSqliteRepository:
 
-    @staticmethod
-    @db_session
-    def create(record: RecordModel):
-        record_sql = Record()
-        record_sql.copy_from_object(record)
-        commit()
-        return record_sql
+    def __init__(self, session):
+        self.session = session
 
-    @staticmethod
-    @db_session
-    def read(record_id):
-        return Record[record_id]
+    def save(self, record: Record):
+        """
+        Created a new record
+        :param record: to create
+        :return: Record
+        """
+        self.session.add(record)
+        self.session.flush()
+        return record
 
-    @staticmethod
-    @db_session
-    def update(self):
-        pass
+    def read(self, record: Record):
+        """
+        Get record by id
+        :param record: to create
+        :return: Record
+        """
+        return self.session.query(Record).filter_by(id=record.id).first()
 
-    @staticmethod
-    @db_session
-    def delete(self):
-        pass
+    def delete(self, record: Record):
+        self.session.delete(record)
+        self.session.flush()
