@@ -1,4 +1,5 @@
 from xml.dom import minidom
+import os
 
 from src.data.model.Me import Me
 from src.data.model.Record import Record
@@ -12,7 +13,7 @@ class RecordsAppleHealthXmlRepository:
         self.location = location
 
     def load_data(self):
-        self.data = minidom.parse(self.location)
+        self.data = minidom.parse(os.path.abspath(self.location))
 
     def find_me(self):
         mrs = self.data.getElementsByTagName('Me')

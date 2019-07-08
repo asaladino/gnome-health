@@ -5,7 +5,8 @@ from src.data.repository.RecordsAppleHealthXmlRepository import RecordsAppleHeal
 class TestRecordsAppleHealthXmlRepository(unittest.TestCase):
 
     def test_import(self):
-        repo = RecordsAppleHealthXmlRepository('../../gnome-health-data/export/apple_health_export/export_sample.xml')
+        path = '../../../../gnome-health-data/export/apple_health_export/export_sample.xml'
+        repo = RecordsAppleHealthXmlRepository(path)
         repo.load_data()
 
         my_info = repo.find_me()
