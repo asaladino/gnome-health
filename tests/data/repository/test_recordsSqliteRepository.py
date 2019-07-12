@@ -1,3 +1,4 @@
+import datetime
 from unittest import TestCase
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -20,6 +21,16 @@ class TestRecordsSqliteRepository(TestCase):
         record = Record(source_name="Testing")
         saved_record = repo.save(record)
         self.assertTrue(saved_record.id > 0)
+
+    def test_find_today(self):
+        repo = RecordsSqliteRepository(_create_session())
+        for index in range(10):
+            record = Record(source_name="Testing " + str(index))
+            record.start = datetime.datetime.today() + datetime.timedelta(days=index - 5)
+            repo.save(record)
+
+        records = repo.find_today()
+        self.assertTrue(len(records) > 0)
 
     def test_read(self):
         repo = RecordsSqliteRepository(_create_session())

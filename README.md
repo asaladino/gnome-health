@@ -1,6 +1,8 @@
-# Gnome Health
-A health data monitoring app for gnome. Organize and collect all
+# Health
+A health data monitoring app. Organize and collect all
 your health data into one location.
+
+![Screen Shot](./docs/screen-shot.png)
 
 ## Build
 
@@ -23,7 +25,7 @@ Instructions on packaging an app for snap.
 
 https://docs.snapcraft.io/python-apps
 
-### Pony ORM
-Documentation on using PonyORM.
+### SQL Alchemy
+Documentation.
 
-https://docs.ponyorm.org/firststeps.html
+https://docs.sqlalchemy.org/en/13/orm/tutorial.html

@@ -3,7 +3,7 @@ import os
 
 from src.data.model.Me import Me
 from src.data.model.Record import Record
-from src.data.model.Types import Gender, BloodType
+from src.data.model.Types import Gender, BloodType, SkinType
 
 
 class RecordsAppleHealthXmlRepository:
@@ -25,7 +25,8 @@ class RecordsAppleHealthXmlRepository:
             me.biological_gender = self._get_gender(gender)
             blood_type = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierBloodType')
             me.blood_type = self._get_blood_type(blood_type)
-            me.fitzpatrick_skin_type = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierFitzpatrickSkinType')
+            skin_type = self._get_attribute_value(r, 'HKCharacteristicTypeIdentifierFitzpatrickSkinType')
+            me.fitzpatrick_skin_type = self._get_skin_type(skin_type)
             return me
         return None
 
@@ -88,6 +89,30 @@ class RecordsAppleHealthXmlRepository:
         if blood_type == "HKBloodTypeOPositive":
             return BloodType.O_POSITIVE
         return BloodType.NOT_SET
+
+    @staticmethod
+    def _get_skin_type(skin_type):
+        """
+        Get the skin type based on apple developer enum
+        https://developer.apple.com/documentation/healthkit/hkfitzpatrickskintype?language=objc
+        :param skin_type: as apple text representation.
+        :return: SkinType
+        """
+        if skin_type == "HKFitzpatrickSkinTypeNotSet":
+            return SkinType.NOT_SET
+        if skin_type == "HKFitzpatrickSkinTypeI":
+            return SkinType.TYPE_I
+        if skin_type == "HKFitzpatrickSkinTypeII":
+            return SkinType.TYPE_II
+        if skin_type == "HKFitzpatrickSkinTypeIII":
+            return SkinType.TYPE_III
+        if skin_type == "HKFitzpatrickSkinTypeIV":
+            return SkinType.TYPE_IV
+        if skin_type == "HKFitzpatrickSkinTypeV":
+            return SkinType.TYPE_V
+        if skin_type == "HKFitzpatrickSkinTypeVI":
+            return SkinType.TYPE_VI
+        return SkinType.NOT_SET
 
     @staticmethod
     def _get_attribute_value(record, attribute):
