@@ -12,7 +12,8 @@ Base = declarative_base()
 class Record(Base):
     __tablename__ = 'record'
     id = Column(Integer, primary_key=True)
-    type = Column(String)
+    # https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier?language=objc
+    type = Column(String)  # Todo: Need to add types like: HKQuantityTypeIdentifierBodyMassIndex
     source_name = Column(String)
     source_version = Column(String)
     unit = Column(String)

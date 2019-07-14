@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import datetime
 
 from gi.repository import Gtk
 
@@ -22,7 +23,24 @@ from gi.repository import Gtk
 class GnomeHealthWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'GnomeHealthWindow'
 
-    label = Gtk.Template.Child()
+    dateTimeButton = Gtk.Template.Child()
+    dateLabel = Gtk.Template.Child()
+    calendar = Gtk.Template.Child()
+    calendarPopover = Gtk.Template.Child()
+    healthTypesListBox = Gtk.Template.Child()
+
+    selectedDate = datetime.date.today()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.calendar.connect('day-selected', self.change_selected_day)
+        self.change_selected_day(self.calendar)
+
+    def change_selected_day(self, widget):
+        the_date = widget.get_date()
+        self.selectedDate = datetime.date(year=the_date.year, month=the_date.month, day=the_date.day)
+        self.show_date()
+        self.calendarPopover.popdown()
+
+    def show_date(self):
+        self.dateLabel.set_text(self.selectedDate.strftime('%b %d, %Y'))
