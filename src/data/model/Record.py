@@ -4,7 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from src.data.model import consts
 
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
+
+from src.data.model.Types import QuantityType
 
 Base = declarative_base()
 
@@ -12,8 +14,7 @@ Base = declarative_base()
 class Record(Base):
     __tablename__ = 'record'
     id = Column(Integer, primary_key=True)
-    # https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier?language=objc
-    type = Column(String)  # Todo: Need to add types like: HKQuantityTypeIdentifierBodyMassIndex
+    type = Column(Enum(QuantityType))
     source_name = Column(String)
     source_version = Column(String)
     unit = Column(String)
