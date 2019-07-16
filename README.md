@@ -29,3 +29,7 @@ https://docs.snapcraft.io/python-apps
 Documentation.
 
 https://docs.sqlalchemy.org/en/13/orm/tutorial.html
+
+### Case Converter
+Works pretty well.
+https://convertcase.net/

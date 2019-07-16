@@ -79,7 +79,6 @@ class QuantityType(Enum):
     """
     Body Measurements
     """
-
     HEIGHT = 0
     # A quantity sample type that measures the user’s height.
 
@@ -101,7 +100,6 @@ class QuantityType(Enum):
     """
     Vital Signs
     """
-
     HEART_RATE = 6
     # A quantity sample type that measures the user’s heart rate.
 
@@ -155,98 +153,127 @@ class QuantityType(Enum):
     # Forced Vital Capacity
     # A quantity sample type that measures the amount of air that can be forcibly exhaled from the lungs after taking the deepest breath possible.
 
-    Inhaler_Usage = 21
+    INHALER_USAGE = 21
+    # Inhaler Usage
     # A quantity sample type that measures the number of puffs the user takes from their inhaler.
 
-    Insulin_Delivery = 22
+    INSULIN_DELIVERY = 22
+    # Insulin Delivery
     # A quantity sample that measures the amount of insulin delivered.
 
-    Number_Of_Times_Fallen = 23
+    NUMBER_OF_TIMES_FALLEN = 23
+    # Number Of Times Fallen
     # A quantity sample type that measures the number of times the user has fallen.
 
-    Peak_Expiratory_Flow_Rate = 24
+    PEAK_EXPIRATORY_FLOW_RATE = 24
+    # Peak Expiratory Flow Rate
     # A quantity sample type that measures the user’s maximum flow rate generated during a forceful exhalation.
 
-    Peripheral_Perfusion_Index = 25
+    PERIPHERAL_PERFUSION_INDEX = 25
+    # Peripheral Perfusion Index
     # A quantity sample type that measures the user’s peripheral perfusion index.
 
     """
     Nutrition
     """
-
-    Dietary_Biotin = 26
+    DIETARY_BIOTIN = 26
+    # Dietary Biotin
     # A quantity sample type that measures the amount of biotin (vitamin B7) consumed.
 
-    Dietary_Caffeine = 27
+    DIETARY_CAFFEINE = 27
+    # Dietary Caffeine
     # A quantity sample type that measures the amount of caffeine consumed.
 
-    Dietary_Calcium = 28
+    DIETARY_CALCIUM = 28
+    # Dietary Calcium = 28
     # A quantity sample type that measures the amount of calcium consumed.
 
-    Dietary_Carbohydrates = 29
+    DIETARY_CARBOHYDRATES = 29
+    # Dietary Carbohydrates
     # A quantity sample type that measures the amount of carbohydrates consumed.
 
-    Dietary_Chloride = 30
+    DIETARY_CHLORIDE = 30
+    # Dietary Chloride
     # A quantity sample type that measures the amount of chloride consumed.
 
-    Dietary_Cholesterol = 31
+    DIETARY_CHOLESTEROL = 31
+    # Dietary Cholesterol
     # A quantity sample type that measures the amount of cholesterol consumed.
 
-    Dietary_Chromium = 32
+    DIETARY_CHROMIUM = 32
+    # Dietary Chromium
     # A quantity sample type that measures the amount of chromium consumed.
 
-    Dietary_Copper = 33
+    DIETARY_COPPER = 33
+    # Dietary Copper
     # A quantity sample type that measures the amount of copper consumed.
 
-    Dietary_Energy_Consumed = 34
+    DIETARY_ENERGY_CONSUMED = 34
+    # Dietary Energy Consumed
     # A quantity sample type that measures the amount of energy consumed.
 
-    Dietary_Fat_Monounsaturated = 35
+    DIETARY_FAT_MONOUNSATURATED = 35
+    # Dietary Fat Monounsaturated
     # A quantity sample type that measures the amount of monounsaturated fat consumed.
 
-    Dietary_Fat_Polyunsaturated = 36
+    DIETARY_FAT_POLYUNSATURATED = 36
+    # Dietary Fat Polyunsaturated
     # A quantity sample type that measures the amount of polyunsaturated fat consumed.
 
-    Dietary_Fat_Saturated = 37
+    DIETARY_FAT_SATURATED = 37
+    # Dietary Fat Saturated
     # A quantity sample type that measures the amount of saturated fat consumed.
 
-    Dietary_Fat_Total = 38
+    DIETARY_FAT_TOTAL = 38
+    # Dietary Fat Total
     # A quantity sample type that measures the total amount of fat consumed.
 
-    Dietary_Fiber = 39
+    DIETARY_FIBER = 39
+    # Dietary Fiber
     # A quantity sample type that measures the amount of fiber consumed.
 
-    Dietary_Folate = 40
+    DIETARY_FOLATE = 40
+    # Dietary Folate
     # A quantity sample type that measures the amount of folate (folic acid) consumed.
 
-    Dietary_Iodine = 41
+    DIETARY_IODINE = 41
+    # Dietary Iodine
     # A quantity sample type that measures the amount of iodine consumed.
 
-    Dietary_Iron = 42
+    DIETARY_IRON = 42
+    # Dietary Iron = 42
     # A quantity sample type that measures the amount of iron consumed.
 
-    Dietary_Magnesium = 43
+    DIETARY_MAGNESIUM = 43
+    # Dietary Magnesium = 43
     # A quantity sample type that measures the amount of magnesium consumed.
 
-    Dietary_Manganese = 44
+    DIETARY_MANGANESE = 44
+    # Dietary Manganese
     # A quantity sample type that measures the amount of manganese consumed.
 
-    Dietary_Molybdenum = 45
+    DIETARY_MOLYBDENUM = 45
+    # Dietary Molybdenum
     # A quantity sample type that measures the amount of molybdenum consumed.
 
-    Dietary_Niacin = 46
+    DIETARY_NIACIN = 46
+    # Dietary Niacin
     # A quantity sample type that measures the amount of niacin (vitamin B3) consumed.
 
-    Dietary_Pantothenic_Acid = 47
+    DIETARY_PANTOTHENIC_ACID = 47
+    # Dietary Pantothenic Acid
     # A quantity sample type that measures the amount of pantothenic acid (vitamin B5) consumed.
 
-    Dietary_Phosphorus = 48
+    DIETARY_PHOSPHORUS = 48
+    # Dietary Phosphorus
     # A quantity sample type that measures the amount of phosphorus consumed.
 
-    Dietary_Potassium = 49
+    DIETARY_POTASSIUM = 49
+    # Dietary Potassium
     # A quantity sample type that measures the amount of potassium consumed.
 
-    Dietary_Protein = 50
+    DIETARY_PROTEIN = 50
+    # Dietary Protein
     # A quantity sample type that measures the amount of protein consumed.
 
     Dietary_Riboflavin = 51
@@ -294,7 +321,6 @@ class QuantityType(Enum):
     """
     Activity
     """
-
     Step_Count = 65
     # A quantity sample type that measures the number of steps the user has taken.
 
@@ -340,21 +366,18 @@ class QuantityType(Enum):
     """
     Reproductive Health
     """
-
     Basal_Body_Temperature = 79
     # A quantity sample type that measures the user’s basal body temperature.
 
     """
     UV Exposure
     """
-
     UV_Exposure = 80
     # A quantity sample type that measures the user’s exposure to UV radiation.
 
     """
     Audio Exposure
     """
-
     Environmental_Audio_Exposure = 81
     # A quantity sample type that measures audio exposure to sounds in the environment.
 
