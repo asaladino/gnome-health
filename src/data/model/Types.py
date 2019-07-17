@@ -276,110 +276,142 @@ class QuantityType(Enum):
     # Dietary Protein
     # A quantity sample type that measures the amount of protein consumed.
 
-    Dietary_Riboflavin = 51
+    DIETARY_RIBOFLAVIN = 51
+    # Dietary Riboflavin
     # A quantity sample type that measures the amount of riboflavin (vitamin B2) consumed.
 
-    Dietary_Selenium = 52
+    DIETARY_SELENIUM = 52
+    # Dietary Selenium
     # A quantity sample type that measures the amount of selenium consumed.
 
-    Dietary_Sodium = 53
+    DIETARY_SODIUM = 53
+    # Dietary Sodium
     # A quantity sample type that measures the amount of sodium consumed.
 
-    Dietary_Sugar = 54
+    DIETARY_SUGAR = 54
+    # Dietary Sugar
     # A quantity sample type that measures the amount of sugar consumed.
 
-    Dietary_Thiamin = 55
+    DIETARY_THIAMIN = 55
+    # Dietary Thiamin
     # A quantity sample type that measures the amount of thiamin (vitamin B1) consumed.
 
-    Dietary_Vitamin_A = 56
+    DIETARY_VITAMIN_A = 56
+    # Dietary Vitamin A
     # A quantity sample type that measures the amount of vitamin A consumed.
 
-    Dietary_Vitamin_B12 = 57
+    DIETARY_VITAMIN_B12 = 57
+    # Dietary Vitamin B12
     # A quantity sample type that measures the amount of cyanocobalamin (vitamin B12) consumed.
 
-    Dietary_Vitamin_B6 = 58
+    DIETARY_VITAMIN_B6 = 58
+    # Dietary Vitamin B6
     # A quantity sample type that measures the amount of pyridoxine (vitamin B6) consumed.
 
-    Dietary_Vitamin_C = 59
+    DIETARY_VITAMIN_C = 59
+    # Dietary Vitamin C
     # A quantity sample type that measures the amount of vitamin C consumed.
 
-    Dietary_Vitamin_D = 60
+    DIETARY_VITAMIN_D = 60
+    # Dietary Vitamin D
     # A quantity sample type that measures the amount of vitamin D consumed.
 
-    Dietary_Vitamin_E = 61
+    DIETARY_VITAMIN_E = 61
+    # Dietary Vitamin E = 61
     # A quantity sample type that measures the amount of vitamin E consumed.
 
-    Dietary_Vitamin_K = 62
+    DIETARY_VITAMIN_K = 62
+    # Dietary Vitamin K
     # A quantity sample type that measures the amount of vitamin K consumed.
 
-    Dietary_Water = 63
+    DIETARY_WATER = 63
+    # Dietary Water
     # A quantity sample type that measures the amount of water consumed.
 
-    Dietary_Zinc = 64
+    DIETARY_ZINC = 64
+    # Dietary Zinc
     # A quantity sample type that measures the amount of zinc consumed.
 
     """
     Activity
     """
-    Step_Count = 65
+    STEP_COUNT = 65
+    # Step Count = 65
     # A quantity sample type that measures the number of steps the user has taken.
 
-    Distance_Walking_Running = 66
+    DISTANCE_WALKING_RUNNING = 66
+    # Distance Walking Running
     # A quantity sample type that measures the distance the user has moved by walking or running.
 
-    Distance_Cycling = 67
+    DISTANCE_CYCLING = 67
+    # Distance Cycling
     # A quantity sample type that measures the distance the user has moved by cycling.
 
-    Push_Count = 68
+    PUSH_COUNT = 68
+    # Push Count
     # A quantity sample type that measures the number of pushes that the user has performed while using a wheelchair.
 
-    Distance_Wheelchair = 69
+    DISTANCE_WHEELCHAIR = 69
+    # Distance Wheelchair
     # A quantity sample type that measures the distance the user has moved using a wheelchair.
 
-    Swimming_Stroke_Count = 70
+    SWIMMING_STROKE_COUNT = 70
+    # Swimming Stroke Count
     # A quantity sample type that measures the number of strokes performed while swimming.
 
-    Distance_Swimming = 71
+    DISTANCE_SWIMMING = 71
+    # Distance Swimming
     # A quantity sample type that measures the distance the user has moved while swimming.
 
-    Distance_Downhill_Snow_Sports = 72
+    DISTANCE_DOWNHILL_SNOW_SPORTS = 72
+    # Distance Downhill Snow Sports
     # A quantity sample type that measures the distance the user has traveled while skiing or snowboarding.
 
-    Basal_Energy_Burned = 73
+    BASAL_ENERGY_BURNED = 73
+    # Basal Energy Burned
     # A quantity sample type that measures the resting energy burned by the user.
 
-    Active_Energy_Burned = 74
+    ACTIVE_ENERGY_BURNED = 74
+    # Active Energy Burned
     # A quantity sample type that measures the amount of active energy the user has burned.
 
-    Flights_Climbed = 75
+    FLIGHTS_CLIMBED = 75
+    # Flights Climbed
     # A quantity sample type that measures the number flights of stairs that the user has climbed.
 
-    Nike_Fuel = 76
+    NIKE_FUEL = 76
+    # Nike Fuel
     # A quantity sample type that measures the number of NikeFuel points the user has earned.
 
-    Apple_Exercise_Time = 77
+    APPLE_EXERCISE_TIME = 77
+    # Apple Exercise Time
     # A quantity sample type that measures the amount of time the user spent exercising.
 
-    Apple_Stand_Time = 78
+    APPLE_STAND_TIME = 78
+    # Apple Stand Time = 78
     # A quantity sample type that measures the amount of time the user has spent standing.
 
     """
     Reproductive Health
     """
-    Basal_Body_Temperature = 79
+    BASAL_BODY_TEMPERATURE = 79
+    # Basal Body Temperature
     # A quantity sample type that measures the user’s basal body temperature.
 
     """
     UV Exposure
     """
-    UV_Exposure = 80
+    UV_EXPOSURE = 80
+    # UV Exposure
     # A quantity sample type that measures the user’s exposure to UV radiation.
 
     """
     Audio Exposure
     """
-    Environmental_Audio_Exposure = 81
+    ENVIRONMENTAL_AUDIO_EXPOSURE = 81
+    # Environmental Audio Exposure
     # A quantity sample type that measures audio exposure to sounds in the environment.
 
-    Headphone_Audio_Exposure = 82
+    HEADPHONE_AUDIO_EXPOSURE = 82
+    # Headphone Audio Exposure
     # A quantity sample type that measures audio exposure from headphones.
