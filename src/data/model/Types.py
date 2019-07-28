@@ -4,9 +4,16 @@ from enum import Enum, unique
 @unique
 class Gender(Enum):
     NOT_SET = 0
+    # Not Set
+
     OTHER = 1
+    # Other
+
     MALE = 2
+    # Male
+
     FEMALE = 3
+    # Female
 
 
 class SkinType(Enum):
@@ -43,91 +50,115 @@ class BloodType(Enum):
     """
 
     NOT_SET = 0
+    # Not Set
     # Either the user’s blood type is not set, or the user has not granted your app permission to read the blood type.
 
     A_POSITIVE = 1
+    # A+ Blood
     # The user has an A+ blood type.
 
     A_NEGATIVE = 2
+    # A– Blood
     # The user has an A– blood type.
 
     B_POSITIVE = 3
+    # B+ Blood
     # The user has an B+ blood type.
 
     B_NEGATIVE = 4
+    # B– Blood
     # The user has an B– blood type.
 
     AB_POSITIVE = 5
+    # AB+ Blood
     # The user has an AB+ blood type.
 
     AB_NEGATIVE = 6
+    # AB– Blood
     # The user has an AB– blood type.
 
     O_POSITIVE = 7
+    # O+ Blood
     # The user has an O+ blood type.
 
     O_NEGATIVE = 8
+    # O– Blood
     # The user has an O– blood type.
 
 
 class QuantityType(Enum):
     """
-    https://developer.apple.com/documentation/healthkit/hkquantitytypeidentifier?language=objc
-    Todo: Need to add types like: HKQuantityTypeIdentifierBodyMassIndex
+    Used to define the identifiers that create quantity type objects.
     """
 
     """
     Body Measurements
     """
     HEIGHT = 0
+    # Height
     # A quantity sample type that measures the user’s height.
 
     BODY_MASS = 1
+    # Body Mass
     # A quantity sample type that measures the user’s weight.
 
-    Body_Mass_Index = 2
+    BODY_MASS_INDEX = 2
+    # Body Mass Index
     # A quantity sample type that measures the user’s body mass index.
 
-    BODY_MASS_INDEX = 3
+    LEAN_BODY_MASS = 3
+    # Lean Body Mass
     # A quantity sample type that measures the user’s lean body mass.
 
     BODY_FAT_PERCENTAGE = 4
+    # Body Fat Percentage
     # A quantity sample type that measures the user’s body fat percentage.
 
     WAIST_CIRCUMFERENCE = 5
+    # Wait Circumference
     # A quantity sample type that measures the user’s waist circumference.
 
     """
     Vital Signs
     """
     HEART_RATE = 6
+    # Heart Rate
     # A quantity sample type that measures the user’s heart rate.
 
     RESTING_HEART_RATE = 7
+    # Resting Heart Rate
     # A quantity sample type that measures the user’s resting heart rate.
 
     WALKING_HEART_RATE_AVERAGE = 8
+    # Walking Heart Rate Average
     # A quantity sample type that measures the user’s heart rate while walking.
 
     HEART_RATE_VARIABILITY_SDNN = 9
+    # Heart Rate Variability SDNN
     # A quantity sample type that measures the standard deviation of heartbeat intervals.
 
     OXYGEN_SATURATION = 10
+    # Oxygen Saturation
     # A quantity sample type that measures the user’s oxygen saturation.
 
     BODY_TEMPERATURE = 11
+    # Body Temperature
     # A quantity sample type that measures the user’s body temperature.
 
     BLOOD_PRESSURE_DIASTOLIC = 12
+    # Blood Pressure Diastolic
     # A quantity sample type that measures the user’s diastolic blood pressure.
 
     BLOOD_PRESSURE_SYSTOLIC = 13
+    # Blood Pressure Systolic
     # A quantity sample type that measures the user’s systolic blood pressure.
 
     RESPIRATORY_RATE = 14
+    # Respiratory Rate
     # A quantity sample type that measures the user’s respiratory rate.
 
     VO2_MAX = 15
+    # VO2 Max
     # A quantity sample that measures the maximal oxygen consumption during incremental exercise.
 
     """
@@ -135,6 +166,7 @@ class QuantityType(Enum):
     """
 
     BLOOD_ALCOHOL_CONTENT = 16
+    # Blood Alcohol Content
     # A quantity sample type that measures the user’s blood alcohol content.
 
     BLOOD_GLUCOSE = 17
