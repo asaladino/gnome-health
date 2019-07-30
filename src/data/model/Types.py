@@ -349,7 +349,7 @@ class QuantityType(Enum):
     # A quantity sample type that measures the amount of vitamin D consumed.
 
     DIETARY_VITAMIN_E = 61
-    # Dietary Vitamin E = 61
+    # Dietary Vitamin E
     # A quantity sample type that measures the amount of vitamin E consumed.
 
     DIETARY_VITAMIN_K = 62
