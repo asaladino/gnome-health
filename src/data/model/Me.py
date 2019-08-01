@@ -20,3 +20,14 @@ class Me(Base):
 
     def set_birth(self, birth):
         self.birth = datetime.strptime(birth, consts.date_format)
+
+    def update(self, me_updated):
+        """
+        Update the properties of me.
+        :param me_updated:
+        :return: None
+        """
+        self.birth = me_updated.birth
+        self.biological_gender = me_updated.biological_gender
+        self.blood_type = me_updated.blood_type
+        self.fitzpatrick_skin_type = me_updated.fitzpatrick_skin_type

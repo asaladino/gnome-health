@@ -15,6 +15,11 @@ glib-compile-resources --target=gnome-health.gresource gnome-health.gresource.xm
 
 ## References
 
+### Glade Layout
+
+#### HeaderBar
+https://gitlab.gnome.org/GNOME/glade/blob/master/src/glade.glade
+
 ### Sample App
 OfflineImap is a good example of a python app packaged with snap.
 

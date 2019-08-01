@@ -18,11 +18,11 @@ resource = Gio.resource_load(join(script_dir, add_src, 'resources', 'gnome-healt
 Gio.Resource._register(resource)
 
 from gi.repository import Gtk
-from src.window import GnomeHealthWindow
+from src.ui.controller.MainController import MainController
 
 
 def run_app():
-    window = GnomeHealthWindow()
+    window = MainController()
     window.set_wmclass("Health", "Health")
     window.connect('delete-event', Gtk.main_quit)
     window.show_all()

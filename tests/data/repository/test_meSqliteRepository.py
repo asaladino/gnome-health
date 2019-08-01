@@ -3,7 +3,7 @@ from unittest import TestCase
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from src.data.model.Me import Me, Base
+from src.data.model.Me import Base
 from src.data.model.Types import Gender, BloodType, SkinType
 from src.data.repository.MeSqliteRepository import MeSqliteRepository
 

@@ -47,10 +47,25 @@ class RecordsSqliteRepository:
     def read(self, record: Record):
         """
         Get record by id
-        :param record: to create
+        :param record: to read
         :return: Record
         """
         return self.session.query(Record).filter_by(id=record.id).first()
+
+    def exists(self, record: Record):
+        """
+        Check if the record exists by matching on all properties except id
+        :param record: to find
+        :return: Record
+        """
+        return self.session.query(Record).filter_by(type=record.type,
+                                                    source_name=record.source_name,
+                                                    source_version=record.source_version,
+                                                    unit=record.unit,
+                                                    created=record.created,
+                                                    start=record.start,
+                                                    end=record.end,
+                                                    value=record.value).first()
 
     def delete(self, record: Record):
         """

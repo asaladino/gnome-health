@@ -1,4 +1,4 @@
-# window.py
+# MainController.py
 #
 # Copyright 2019 Adam Saladino
 #
@@ -20,7 +20,7 @@ from gi.repository import Gtk
 
 
 @Gtk.Template(resource_path='/com/codingsimply/gnome/health/window.ui')
-class GnomeHealthWindow(Gtk.ApplicationWindow):
+class MainController(Gtk.ApplicationWindow):
     __gtype_name__ = 'GnomeHealthWindow'
 
     dateTimeButton = Gtk.Template.Child()
@@ -31,9 +31,13 @@ class GnomeHealthWindow(Gtk.ApplicationWindow):
 
     selectedDate = datetime.date.today()
 
+    importDialog = Gtk.Template.Child()
+    appCloseButton = Gtk.Template.Child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.calendar.connect('day-selected', self.change_selected_day)
+        # self.appCloseButton.connect('app.close', self.app_close)
         self.change_selected_day(self.calendar)
 
     def change_selected_day(self, widget):
@@ -44,3 +48,10 @@ class GnomeHealthWindow(Gtk.ApplicationWindow):
 
     def show_date(self):
         self.dateLabel.set_text(self.selectedDate.strftime('%b %d, %Y'))
+
+    def import_dialog_open(self):
+        print("hello")
+        self.importDialog.show()
+
+    def app_close(self):
+        Gtk.main_quit()

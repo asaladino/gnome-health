@@ -35,7 +35,8 @@ class RecordsAppleHealthXmlRepository:
         rs = self.data.getElementsByTagName('Record')
         for r in rs:
             record = Record()
-            record.type = self._get_attribute_value(r, 'type')
+            r_type = self._get_attribute_value(r, 'type')
+            record.type = self._get_quantity_type(r_type)
             record.source_name = self._get_attribute_value(r, 'sourceName')
             record.source_version = self._get_attribute_value(r, 'sourceVersion')
             record.unit = self._get_attribute_value(r, 'unit')
