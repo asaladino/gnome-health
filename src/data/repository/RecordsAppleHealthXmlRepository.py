@@ -30,11 +30,14 @@ class RecordsAppleHealthXmlRepository:
             return me
         return None
 
-    def find_all_records(self):
-        result = []
+    def find_all_records(self, last_id=None):
+        results = {}  # need to use a dictionary to remove any duplicate entries.
         rs = self.data.getElementsByTagName('Record')
         for r in rs:
             record = Record()
+            if last_id is not None:
+                last_id += 1
+                record.id = last_id
             r_type = self._get_attribute_value(r, 'type')
             record.type = self._get_quantity_type(r_type)
             record.source_name = self._get_attribute_value(r, 'sourceName')
@@ -44,8 +47,26 @@ class RecordsAppleHealthXmlRepository:
             record.set_start(self._get_attribute_value(r, 'startDate'))
             record.set_end(self._get_attribute_value(r, 'endDate'))
             record.value = self._get_attribute_value(r, 'value')
-            result.append(record)
-        return result
+            # not every value is a number. In the case of sleep, the value corresponds to an enum
+            if self._is_number(record.value):
+                record.set_hash()
+                results[record.hash] = record
+        return results
+
+    '''
+    https://developer.apple.com/documentation/healthkit/hkcategoryvalue
+    sqlalchemy.exc.StatementError: (builtins.ValueError) could not convert string to float: 'HKCategoryValueSleepAnalysisInBed'
+    [SQL: INSERT INTO record (id, hash, source_name, source_version, created, start, "end", value) VALUES (?, ?, ?, ?, ?, ?, ?, ?)]
+    [parameters: [{'id': 1458981, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 13, 5, 50, 9, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 12, 22, 50, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': 'ce9efdff2a4dfdf653bd738208ae3086097b7243283ddd384bd96393', 'end': datetime.datetime(2017, 4, 13, 5, 9, 44, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458982, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 13, 5, 50, 9, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 13, 5, 22, 4, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': '6a69a6f81097f3653dd96b2ef5ca711c922d42f64c2856593fec137f', 'end': datetime.datetime(2017, 4, 13, 5, 45, 4, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458983, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 13, 5, 50, 9, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 13, 5, 46, 20, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': 'aaac55c01828bc85554b5bf542bfefb5f683c3355422048d4522a69f', 'end': datetime.datetime(2017, 4, 13, 5, 50, 9, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458984, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 14, 5, 51, 6, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 13, 22, 50, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': '4f81e697f1624fea62e5bbeb8477ff98e1bcc3834b33bd28b4eb0a6d', 'end': datetime.datetime(2017, 4, 14, 2, 32, 40, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458985, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 14, 5, 51, 6, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 14, 2, 33, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': 'c3c8735603b7efd3dfb6b916c88b3974f1151ab3afeba6ecbc3a0bfe', 'end': datetime.datetime(2017, 4, 14, 3, 0, 8, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458986, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 14, 5, 51, 6, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 14, 3, 1, 52, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': '4e6bd601268f356858f5b4072c99a252462fb5793f0fa70c54c91ea2', 'end': datetime.datetime(2017, 4, 14, 3, 20, 28, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458987, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 14, 5, 51, 6, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 14, 3, 21, 44, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': '0e179ceefe313e71db81e1a6c2827f316dd7106d5f2453ac024ee94c', 'end': datetime.datetime(2017, 4, 14, 3, 31, 52, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}, {'id': 1458988, 'source_version': '50', 'value': 'HKCategoryValueSleepAnalysisInBed', 'created': datetime.datetime(2017, 4, 14, 5, 51, 6, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2017, 4, 14, 3, 32, 20, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': '61401a8ac1440f717eb009a25d7499be6222b486ff5caa07513bddef', 'end': datetime.datetime(2017, 4, 14, 5, 51, 4, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Clock'}  ... displaying 10 of 11105 total bound parameter sets ...  {'id': 1470084, 'source_version': '5.2.1', 'value': 'HKCategoryValueAppleStandHourStood', 'created': datetime.datetime(2019, 6, 22, 19, 25, 48, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2019, 6, 22, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': 'ea2585a39728b547b23b4caf6c8ce3cae9c5404f20fc26ef08e6389c', 'end': datetime.datetime(2019, 6, 22, 20, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Adam’s Apple\xa0Watch'}, {'id': 1470085, 'source_version': '5.2.1', 'value': 'HKCategoryValueAppleStandHourStood', 'created': datetime.datetime(2019, 6, 22, 20, 8, 38, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'start': datetime.datetime(2019, 6, 22, 20, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'hash': 'd8ade6fc11246d467d2224f17ac7442dd45771c39d3d0ac070c61f1e', 'end': datetime.datetime(2019, 6, 22, 21, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=72000))), 'source_name': 'Adam’s Apple\xa0Watch'}]]
+    '''
+
+    @staticmethod
+    def _is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
 
     @staticmethod
     def _get_attribute_value(record, attribute):

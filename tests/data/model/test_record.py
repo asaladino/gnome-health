@@ -17,3 +17,8 @@ class TestRecord(unittest.TestCase):
         self.assertIsNotNone(record.start)
 
         print(record.start)
+
+    def test_set_id(self):
+        record = Record()
+        record.set_hash()
+        self.assertIsNotNone(record.hash)

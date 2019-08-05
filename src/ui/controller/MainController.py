@@ -15,8 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import datetime
+import threading
+import time
 
 from gi.repository import Gtk
+
+from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
+from src.data.service.ImportService import ImportService
+from src.utility.DbSession import create_session
 
 
 @Gtk.Template(resource_path='/com/codingsimply/gnome/health/window.ui')
@@ -24,20 +30,31 @@ class MainController(Gtk.ApplicationWindow):
     __gtype_name__ = 'GnomeHealthWindow'
 
     dateTimeButton = Gtk.Template.Child()
-    dateLabel = Gtk.Template.Child()
     calendar = Gtk.Template.Child()
     calendarPopover = Gtk.Template.Child()
     healthTypesListBox = Gtk.Template.Child()
+    headerBar = Gtk.Template.Child()
 
     selectedDate = datetime.date.today()
 
     importDialog = Gtk.Template.Child()
     appCloseButton = Gtk.Template.Child()
+    importButton = Gtk.Template.Child()
+    cancelImportButton = Gtk.Template.Child()
+    importFileChooserButton = Gtk.Template.Child()
+    runImportButton = Gtk.Template.Child()
+    importProgressBar = Gtk.Template.Child()
+    loadingSpinner = Gtk.Template.Child()
+
+    dbSession = create_session()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.calendar.connect('day-selected', self.change_selected_day)
-        # self.appCloseButton.connect('app.close', self.app_close)
+        self.appCloseButton.connect('clicked', self.app_close)
+        self.importButton.connect('clicked', self.import_dialog_open)
+        self.cancelImportButton.connect('clicked', self.import_dialog_close)
+        self.runImportButton.connect('clicked', self.run_import)
         self.change_selected_day(self.calendar)
 
     def change_selected_day(self, widget):
@@ -47,11 +64,43 @@ class MainController(Gtk.ApplicationWindow):
         self.calendarPopover.popdown()
 
     def show_date(self):
-        self.dateLabel.set_text(self.selectedDate.strftime('%b %d, %Y'))
+        self.headerBar.set_subtitle(self.selectedDate.strftime('%b %d, %Y'))
 
-    def import_dialog_open(self):
-        print("hello")
+    # noinspection PyUnusedLocal
+    def import_dialog_open(self, widget):
         self.importDialog.show()
 
-    def app_close(self):
+    # noinspection PyUnusedLocal
+    def run_import(self, widget):
+        files = self.importFileChooserButton.get_files()
+        self.loadingSpinner.activate()
+        self.loadingSpinner.start()
+        if len(files) > 0:
+            path = files[0].get_path()
+            import_thread = threading.Thread(target=self.async_import, args=(path,))
+            import_thread.start()
+        else:
+            self.importDialog.hide()
+
+    def async_import(self, path):
+        import_service = ImportService(self.dbSession)
+        import_service.apple_import(path, self.update_progress)
+        self.importProgressBar.set_fraction(0.0)
+        self.importDialog.hide()
+
+    def update_progress(self, progress, total, message):
+        print(progress, total, message)
+        if progress == -2:
+            self.loadingSpinner.stop()
+
+        if progress > 0:
+            self.importProgressBar.set_fraction(progress / total)
+
+    # noinspection PyUnusedLocal
+    def import_dialog_close(self, widget):
+        self.importDialog.hide()
+
+    # noinspection PyUnusedLocal
+    @staticmethod
+    def app_close(widget):
         Gtk.main_quit()

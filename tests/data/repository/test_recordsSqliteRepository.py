@@ -50,6 +50,15 @@ class TestRecordsSqliteRepository(TestCase):
         got_record_2 = repo.read(saved_record)
         self.assertEqual(record.source_name, got_record_2.source_name)
 
+    def test_last_id(self):
+        repo = RecordsSqliteRepository(_create_session())
+        last = 10
+        for i in range(last):
+            record = Record(source_name="Testing " + str(i))
+            repo.save(record)
+        last_id = repo.last_id()
+        self.assertEqual(last, last_id)
+
     def test_delete(self):
         repo = RecordsSqliteRepository(_create_session())
         record = Record(source_name="Testing")

@@ -44,6 +44,17 @@ class RecordsSqliteRepository:
         self.session.flush()
         return record
 
+    def save_all(self, records: [Record]):
+        self.session.bulk_save_objects(records)
+        self.session.commit()
+        self.session.flush()
+
+    def last_id(self):
+        result = self.session.query(Record).order_by(Record.id.desc()).first()
+        if result is not None:
+            return result.id
+        return None
+
     def read(self, record: Record):
         """
         Get record by id
@@ -51,6 +62,9 @@ class RecordsSqliteRepository:
         :return: Record
         """
         return self.session.query(Record).filter_by(id=record.id).first()
+
+    def exists_by_hash(self, record: Record):
+        return self.session.query(Record).filter_by(hash=record.hash).first()
 
     def exists(self, record: Record):
         """

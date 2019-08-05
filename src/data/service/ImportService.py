@@ -1,3 +1,4 @@
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
 from src.data.repository.MeSqliteRepository import MeSqliteRepository
@@ -37,15 +38,25 @@ class ImportService:
         me = me_sqlite_repo.read()
         me.update(me_updated)
         me_sqlite_repo.save(me)
-        progress(1, 1, 'Saved me info')
+        progress(-1, 0, 'Saved me info')
 
-        records_to_import = apple_health_xml_repo.find_all_records()
+        last_id = records_sqlite_repo.last_id()
+        if last_id is None:
+            last_id = 0
+
+        progress(-1, 0, 'Loading records')
+        records_to_import = apple_health_xml_repo.find_all_records(last_id)
         progress(-1, len(records_to_import), 'Importing records')
         records_that_were_imported = 0
-        for index, r in enumerate(records_to_import):
-            if records_sqlite_repo.exists(r) is None:
-                records_sqlite_repo.save(r)
-                records_that_were_imported += 1
-                progress(index, len(records_to_import), 'Saved record')
+        records_to_save = []
+        index = 0
+        for h, r in records_to_import.items():
+            progress(index, len(records_to_import), 'Checking record')
+            index += 1
+            if records_sqlite_repo.exists_by_hash(r) is None:
+                records_to_save.append(r)
+
+        progress(-1, len(records_to_save), 'Saving records')
+        records_sqlite_repo.save_all(records_to_save)
 
         return me is not None, len(records_to_import), records_that_were_imported
