@@ -31,14 +31,16 @@ class ImportService:
 
         # Load the xml to save.
         apple_health_xml_repo = RecordsAppleHealthXmlRepository(path)
+        progress(-1, 0, 'Loading data')
         apple_health_xml_repo.load_data()
 
         # Update me information.
+        progress(-1, 0, 'Looking for personal info')
         me_updated = apple_health_xml_repo.find_me()
         me = me_sqlite_repo.read()
         me.update(me_updated)
         me_sqlite_repo.save(me)
-        progress(-1, 0, 'Saved me info')
+        progress(-1, 0, 'Saved personal info')
 
         last_id = records_sqlite_repo.last_id()
         if last_id is None:
@@ -46,7 +48,7 @@ class ImportService:
 
         progress(-1, 0, 'Loading records')
         records_to_import = apple_health_xml_repo.find_all_records(last_id)
-        progress(-1, len(records_to_import), 'Importing records')
+        progress(-1, len(records_to_import), 'Importing ' + str(len(records_to_import)) + ' records')
         records_that_were_imported = 0
         records_to_save = []
         index = 0

@@ -24,7 +24,7 @@ class Record(Base):
     value = Column(Float)
 
     def __repr__(self):
-        return "<Record(source_name='%s')>" % self.source_name
+        return "<Record(type='%s', value='%d' unit='%s')>" % (self.type, self.value, self.unit)
 
     def set_hash(self):
         props_to_use = [self.type if self.type is not None else '',

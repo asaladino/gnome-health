@@ -34,6 +34,18 @@ class RecordsSqliteRepository:
             filter(Record.start.between(the_date, tomorrow)). \
             all()
 
+    def find_most_recent(self):
+        """
+        Find the most recent results.
+        :return: results or None
+        """
+        record = self.session.query(Record).order_by(Record.created.desc()).first()
+        if record is not None:
+            the_date = record.created.date()
+            tomorrow = the_date + datetime.timedelta(days=1)
+            return self.session.query(Record).filter(Record.start.between(the_date, tomorrow)).all()
+        return None
+
     def save(self, record: Record):
         """
         Created a new record
@@ -45,11 +57,20 @@ class RecordsSqliteRepository:
         return record
 
     def save_all(self, records: [Record]):
+        """
+        Save all but they will need an id. Use, last_id and iterate off of it.
+        :param records: to save.
+        :return: None
+        """
         self.session.bulk_save_objects(records)
         self.session.commit()
         self.session.flush()
 
     def last_id(self):
+        """
+        Get the last id used.
+        :return: the last id or None
+        """
         result = self.session.query(Record).order_by(Record.id.desc()).first()
         if result is not None:
             return result.id
@@ -64,6 +85,11 @@ class RecordsSqliteRepository:
         return self.session.query(Record).filter_by(id=record.id).first()
 
     def exists_by_hash(self, record: Record):
+        """
+        Check if the record exists by matching on all properties except hash
+        :param record: to find
+        :return: Record
+        """
         return self.session.query(Record).filter_by(hash=record.hash).first()
 
     def exists(self, record: Record):

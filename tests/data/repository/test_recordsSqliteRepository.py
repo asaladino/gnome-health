@@ -1,7 +1,11 @@
 import datetime
+import os
 from unittest import TestCase
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from src.data.model.Record import Base as RecordBase
+from src.data.model.Me import Base as MeBase
 
 from src.data.model.Record import Record, Base
 from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
@@ -11,6 +15,16 @@ def _create_session():
     engine = create_engine('sqlite:///:memory:', echo=True)
     session = sessionmaker(bind=engine)
     Base.metadata.create_all(engine)
+    return session()
+
+
+def _create_session_from_file():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    db_file = os.path.abspath(os.path.join(dir_path, '..', '..', '..', 'test_data', 'your_data_full.sqlite'))
+    engine = create_engine('sqlite:///' + db_file, echo=False)
+    session = sessionmaker(bind=engine)
+    RecordBase.metadata.create_all(engine)
+    MeBase.metadata.create_all(engine)
     return session()
 
 
@@ -30,6 +44,11 @@ class TestRecordsSqliteRepository(TestCase):
             repo.save(record)
 
         records = repo.find_today()
+        self.assertTrue(len(records) > 0)
+
+    def test_find_most_recent(self):
+        repo = RecordsSqliteRepository(_create_session_from_file())
+        records = repo.find_most_recent()
         self.assertTrue(len(records) > 0)
 
     def test_read(self):

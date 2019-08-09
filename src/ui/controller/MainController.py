@@ -57,6 +57,14 @@ class MainController(Gtk.ApplicationWindow):
         self.runImportButton.connect('clicked', self.run_import)
         self.change_selected_day(self.calendar)
 
+        self.load_most_recent_records()
+
+    def load_most_recent_records(self):
+        records_sqlite_repo = RecordsSqliteRepository(self.dbSession)
+        records = records_sqlite_repo.find_most_recent()
+        for record in records:
+            print(record)
+
     def change_selected_day(self, widget):
         the_date = widget.get_date()
         self.selectedDate = datetime.date(year=the_date.year, month=the_date.month, day=the_date.day)
@@ -75,6 +83,9 @@ class MainController(Gtk.ApplicationWindow):
         files = self.importFileChooserButton.get_files()
         self.loadingSpinner.activate()
         self.loadingSpinner.start()
+        self.runImportButton.set_sensitive(False)
+        self.cancelImportButton.set_sensitive(False)
+        self.importProgressBar.set_show_text(True)
         if len(files) > 0:
             path = files[0].get_path()
             import_thread = threading.Thread(target=self.async_import, args=(path,))
@@ -83,17 +94,23 @@ class MainController(Gtk.ApplicationWindow):
             self.importDialog.hide()
 
     def async_import(self, path):
-        import_service = ImportService(self.dbSession)
+        import_service = ImportService(create_session())
         import_service.apple_import(path, self.update_progress)
         self.importProgressBar.set_fraction(0.0)
+        self.importProgressBar.set_show_text(False)
+        self.runImportButton.set_sensitive(True)
+        self.cancelImportButton.set_sensitive(True)
+        self.loadingSpinner.stop()
         self.importDialog.hide()
 
     def update_progress(self, progress, total, message):
-        print(progress, total, message)
-        if progress == -2:
-            self.loadingSpinner.stop()
+        # print(progress, total, message)
+        if progress == -1:
+            self.loadingSpinner.start()
+            self.importProgressBar.set_text(message)
 
         if progress > 0:
+            self.loadingSpinner.stop()
             self.importProgressBar.set_fraction(progress / total)
 
     # noinspection PyUnusedLocal
