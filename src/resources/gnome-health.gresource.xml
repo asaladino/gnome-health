@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/com/codingsimply/gnome/health">
     <file>window.ui</file>
+    <file>import_dialog.ui</file>
   </gresource>
 </gresources>

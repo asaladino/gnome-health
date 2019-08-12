@@ -15,6 +15,9 @@ glib-compile-resources --target=gnome-health.gresource gnome-health.gresource.xm
 
 ## References
 
+### PyGObject
+https://pygobject.readthedocs.io
+
 ### Glade Layout
 
 #### HeaderBar
