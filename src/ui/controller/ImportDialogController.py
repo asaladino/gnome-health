@@ -33,7 +33,6 @@ class ImportDialogController(Gtk.Dialog):
         files = self.importFileChooserButton.get_files()
         if len(files) > 0:
             self.ui_start_import()
-
             path = files[0].get_path()
             self.importThread = threading.Thread(target=self.async_import, args=(path,))
             self.importThread.daemon = True

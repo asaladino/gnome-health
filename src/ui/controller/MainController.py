@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import datetime
+import threading
 
 from gi.repository import Gtk
 
@@ -48,10 +49,14 @@ class MainController(Gtk.ApplicationWindow):
         self.appCloseButton.connect('clicked', self.app_close)
         self.importButton.connect('clicked', self.import_dialog_open)
         self.change_selected_day(self.calendar)
-
         self.load_most_recent_records()
 
     def load_most_recent_records(self):
+        most_recent_thread = threading.Thread(target=self.load_most_recent_records_async, args=())
+        most_recent_thread.daemon = True
+        most_recent_thread.start()
+
+    def load_most_recent_records_async(self):
         records_sqlite_repo = RecordsSqliteRepository(self.dbSession)
         records = records_sqlite_repo.find_most_recent()
         for record in records:

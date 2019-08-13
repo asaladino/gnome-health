@@ -447,3 +447,19 @@ class QuantityType(Enum):
     HEADPHONE_AUDIO_EXPOSURE = 82
     # Headphone Audio Exposure
     # A quantity sample type that measures audio exposure from headphones.
+
+
+class QuantityTypeInfo:
+    info = dict()
+    info[QuantityType.HEIGHT] = {
+        'name': 'Height',
+        'description': 'A quantity sample type that measures the user’s height.'
+    }
+    info[QuantityType.DISTANCE_WALKING_RUNNING] = {
+        'name': 'Distance Walking Running',
+        'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'
+    }
+    info[QuantityType.STEP_COUNT] = {
+        'name': 'Step Count',
+        'description': 'A quantity sample type that measures the number of steps the user has taken.'
+    }
