@@ -17,10 +17,13 @@ glib-compile-resources --target=gnome-health.gresource gnome-health.gresource.xm
 
 ### Code Coverage
 https://coverage.readthedocs.io/en/v4.5.x/
+
 https://docs.python.org/dev/library/unittest.mock.html
 
 ### PyGObject
 https://pygobject.readthedocs.io
+
+https://python-gtk-3-tutorial.readthedocs.io/
 
 ### Glade Layout
 

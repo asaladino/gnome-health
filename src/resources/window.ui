@@ -168,12 +168,68 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
+            <property name="baseline_position">top</property>
             <child>
-              <object class="GtkListBox" id="healthTypesListBox">
+              <object class="GtkToolbar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkToolButton" id="prevDayButton">
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Previous Day</property>
+                    <property name="stock_id">gtk-media-previous</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="todayButton">
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Today</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="mostRecentButton">
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Most Recent</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="nextDayButton">
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Next Day</property>
+                    <property name="stock_id">gtk-media-next</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="groupsScrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">True</property>

@@ -5,8 +5,8 @@ from sqlalchemy.orm import sessionmaker
 
 from src.data.model.Record import Base as RecordBase
 from src.data.model.Me import Base as MeBase
-from src.data.model.Types import QuantityType, QuantityTypeInfo
 from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
+from src.data.service.GroupingService import GroupingService
 
 
 def _create_session():
@@ -19,40 +19,16 @@ def _create_session():
     return session()
 
 
-class Group:
-    total = 0
-    unit = ''
-    type = None
-    name = None
-    description = None
-    end = None
-
-    def __repr__(self):
-        return "<Group(type='%s', value='%d' unit='%s')>" % (self.type, self.total, self.unit)
-
-
 class TestGroupingService(TestCase):
 
     def test_sum_groups(self):
         records_sqlite_repo = RecordsSqliteRepository(_create_session())
         records = records_sqlite_repo.find_most_recent()
+        groups = GroupingService.for_records(records)
+        self.assertTrue(len(groups) > 0)
 
-        groups = dict()
-
-        for record in records:
-            try:
-                groups[record.type]
-            except KeyError:
-                groups[record.type] = Group()
-                groups[record.type].unit = record.unit
-                groups[record.type].type = record.type
-                groups[record.type].end = record.end
-                groups[record.type].name = QuantityTypeInfo.info[record.type]['name']
-                groups[record.type].description = QuantityTypeInfo.info[record.type]['description']
-
-            groups[record.type].total += record.value
-
-        for key in groups:
-            print(groups[key].name)
-            print(groups[key].end)
-            print(groups[key].total)
+    def test_sum_groups_list_store(self):
+        records_sqlite_repo = RecordsSqliteRepository(_create_session())
+        records = records_sqlite_repo.find_most_recent()
+        groups = GroupingService.for_records_as_list_store(records)
+        self.assertTrue(len(groups) > 0)
