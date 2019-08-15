@@ -15,3 +15,12 @@ def create_session():
     RecordBase.metadata.create_all(engine)
     MeBase.metadata.create_all(engine)
     return session()
+
+def create_session_2():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    db_file = os.path.abspath(os.path.join(dir_path, '..', '..', 'test_data', 'your_data.sqlite'))
+    engine = create_engine('sqlite:///' + db_file, echo=False)
+    session = scoped_session(sessionmaker(bind=engine))
+    RecordBase.metadata.create_all(engine)
+    MeBase.metadata.create_all(engine)
+    return session

@@ -19,10 +19,11 @@ import threading
 
 from gi.repository import Gtk, GLib, GObject
 
+from src.data.model.RecordGroup import RecordGroup
 from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
 from src.data.service.GroupingService import GroupingService
 from src.ui.controller.ImportDialogController import ImportDialogController
-from src.utility.DbSession import create_session
+from src.utility.DbSession import create_session, create_session_2
 
 
 @Gtk.Template(resource_path='/com/codingsimply/gnome/health/window.ui')
@@ -34,63 +35,87 @@ class MainController(Gtk.ApplicationWindow):
     calendarPopover = Gtk.Template.Child()
     headerBar = Gtk.Template.Child()
     groupsScrolledWindow = Gtk.Template.Child()
+    healthTypesListBox = Gtk.Template.Child()
 
     selectedDate = datetime.date.today()
 
-    prevDayButton = datetime.date.today()
-    todayButton = datetime.date.today()
-    mostRecentButton = datetime.date.today()
-    nextDayButton = datetime.date.today()
+    prevDayButton = Gtk.Template.Child()
+    todayButton = Gtk.Template.Child()
+    mostRecentButton = Gtk.Template.Child()
+    nextDayButton = Gtk.Template.Child()
 
     appCloseButton = Gtk.Template.Child()
     importButton = Gtk.Template.Child()
 
     importDialog = None
 
-    dbSession = create_session()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.records_sqlite_repo = RecordsSqliteRepository(self.dbSession)
+        db_session = create_session_2()
+        records_sqlite_repo = RecordsSqliteRepository(db_session())
+        self.selectedDate = records_sqlite_repo.find_most_recent_date()
+        db_session.remove()
+        self.calendar.select_month(self.selectedDate.month, self.selectedDate.year)
+
         self.calendar.connect('day-selected', self.change_selected_day)
         self.appCloseButton.connect('clicked', self.app_close)
         self.importButton.connect('clicked', self.import_dialog_open)
-        self.change_selected_day(self.calendar)
-        self.load_most_recent_records()
 
-    def load_most_recent_records(self):
-        most_recent_thread = threading.Thread(target=self.load_most_recent_records_async, args=())
+        self.prevDayButton.connect('clicked', self.prev_day)
+        self.nextDayButton.connect('clicked', self.next_day)
+
+        self.calendar.select_day(self.selectedDate.day)
+
+    def prev_day(self, widget):
+        the_date = self.selectedDate + datetime.timedelta(days=-1)
+        self.set_selected_day(the_date)
+
+    def next_day(self, widget):
+        the_date = self.selectedDate + datetime.timedelta(days=1)
+        self.set_selected_day(the_date)
+
+    def load_records(self):
+        most_recent_thread = threading.Thread(target=self.load_records_async, args=())
         most_recent_thread.daemon = True
         most_recent_thread.start()
 
-    def load_most_recent_records_async(self):
-        records = self.records_sqlite_repo.find_most_recent()
-        groups_store = GroupingService.for_records_as_list_store(records)
-        GLib.idle_add(self.display_most_recent_records, groups_store)
+    def load_records_async(self):
+        db_session = create_session_2()
+        records_sqlite_repo = RecordsSqliteRepository(db_session())
+        records = records_sqlite_repo.find_on_date(self.selectedDate)
+        db_session.remove()
+        groups = GroupingService.for_records(records)
+        GLib.idle_add(self.display_most_recent_records, groups)
 
-    def display_most_recent_records(self, groups_store):
-        health_types_list_box = Gtk.ListBox()
-        for entry in groups_store:
+    def display_most_recent_records(self, groups):
+        for child in self.healthTypesListBox.get_children():
+            self.healthTypesListBox.remove(child)
+
+        for record_type in groups:
+            group = groups[record_type]  # type: RecordGroup
             row = Gtk.ListBoxRow()
             hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
             row.add(hbox)
             vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
             hbox.pack_start(vbox, True, True, 5)
 
-            label1 = Gtk.Label(entry[0], xalign=0)
-            label2 = Gtk.Label(str(entry[1]) + ' ' + entry[2], xalign=0)
+            label1 = Gtk.Label(group.name, xalign=0)
+            label2 = Gtk.Label(str(group.total) + ' ' + group.unit, xalign=0)
             vbox.pack_start(label1, True, True, 5)
             vbox.pack_start(label2, True, True, 5)
-            health_types_list_box.add(row)
+            self.healthTypesListBox.add(row)
 
-        self.groupsScrolledWindow.add(health_types_list_box)
-        health_types_list_box.show_all()
+        self.healthTypesListBox.show_all()
 
     def change_selected_day(self, widget):
         the_date = widget.get_date()
+        self.set_selected_day(the_date)
+
+    def set_selected_day(self, the_date):
         self.selectedDate = datetime.date(year=the_date.year, month=the_date.month, day=the_date.day)
         self.show_date()
         self.calendarPopover.popdown()
+        self.load_records()
 
     def show_date(self):
         self.headerBar.set_subtitle(self.selectedDate.strftime('%b %d, %Y'))

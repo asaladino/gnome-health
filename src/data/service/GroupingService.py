@@ -25,8 +25,12 @@ class GroupingService:
                 groups[record.type].unit = record.unit
                 groups[record.type].type = record.type
                 groups[record.type].end = record.end
-                groups[record.type].name = QuantityTypeInfo.info[record.type]['name']
-                groups[record.type].description = QuantityTypeInfo.info[record.type]['description']
+                try:
+                    groups[record.type].name = QuantityTypeInfo.info[record.type]['name']
+                    groups[record.type].description = QuantityTypeInfo.info[record.type]['description']
+                except KeyError:
+                    groups[record.type].name = str(record.type.name).replace('_', ' ').lower().title()
+                    groups[record.type].description = "Missing type info: description " + str(record.type.name)
 
             groups[record.type].total += record.value
             groups[record.type].records.append(record)

@@ -455,6 +455,10 @@ class QuantityTypeInfo:
         'name': 'Height',
         'description': 'A quantity sample type that measures the user’s height.'
     }
+    info[QuantityType.HEART_RATE] = {
+        'name': 'Heart Rate',
+        'description': 'A quantity sample type that measures the user’s heart rate.'
+    }
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',
         'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'

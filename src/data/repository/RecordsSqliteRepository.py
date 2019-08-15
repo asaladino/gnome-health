@@ -46,6 +46,12 @@ class RecordsSqliteRepository:
             return self.session.query(Record).filter(Record.start.between(the_date, tomorrow)).all()
         return None
 
+    def find_most_recent_date(self):
+        record = self.session.query(Record).order_by(Record.created.desc()).first()
+        if record is not None:
+            return record.created.date()
+        return None
+
     def save(self, record: Record):
         """
         Created a new record
