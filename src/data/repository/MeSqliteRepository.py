@@ -4,7 +4,14 @@ from src.data.model.Me import Me
 class MeSqliteRepository:
 
     def __init__(self, session):
-        self.session = session
+        self.session_func = session
+        self.session = self.session_func()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, _type, value, traceback):
+        self.session_func.remove()
 
     def read(self):
         """

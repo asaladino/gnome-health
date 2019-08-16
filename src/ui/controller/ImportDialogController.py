@@ -4,6 +4,7 @@ from src.data.service.ImportService import ImportService
 from src.utility.DbSession import create_session
 
 
+# noinspection PyUnresolvedReferences
 @Gtk.Template(resource_path='/com/codingsimply/gnome/health/import_dialog.ui')
 class ImportDialogController(Gtk.Dialog):
     __gtype_name__ = 'ImportDialog'
@@ -41,9 +42,9 @@ class ImportDialogController(Gtk.Dialog):
             self.hide()
 
     def async_import(self, path):
-
-        import_service = ImportService(create_session())
-        import_service.apple_import(path, lambda progress, total, message: GLib.idle_add(self.update_progress, progress, total, message))
+        service = ImportService(create_session())
+        service.apple_import(path, lambda progress, total, message: GLib.idle_add(
+            self.update_progress, progress, total, message))
 
         GLib.idle_add(self.ui_reset_import)
         GLib.idle_add(self.hide)

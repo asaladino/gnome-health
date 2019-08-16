@@ -449,6 +449,11 @@ class QuantityType(Enum):
     # A quantity sample type that measures audio exposure from headphones.
 
 
+class CalcType(Enum):
+    SUM = 0
+    AVERAGE = 1
+
+
 class QuantityTypeInfo:
     info = dict()
     info[QuantityType.HEIGHT] = {
@@ -457,7 +462,8 @@ class QuantityTypeInfo:
     }
     info[QuantityType.HEART_RATE] = {
         'name': 'Heart Rate',
-        'description': 'A quantity sample type that measures the user’s heart rate.'
+        'description': 'A quantity sample type that measures the user’s heart rate.',
+        'calc': CalcType.AVERAGE
     }
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',

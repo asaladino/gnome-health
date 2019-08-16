@@ -2,7 +2,7 @@
 A health data monitoring app. Organize and collect all
 your health data into one location.
 
-![Screen Shot](./docs/screen-shot.png)
+![Screen Shot](./docs/screenshot.png)
 
 ## Build
 
@@ -24,6 +24,8 @@ https://docs.python.org/dev/library/unittest.mock.html
 https://pygobject.readthedocs.io
 
 https://python-gtk-3-tutorial.readthedocs.io/
+
+https://stackoverflow.com/questions/41308497/pygi-how-to-use-a-gtklistbox-with-a-gtkliststore
 
 ### Glade Layout
 

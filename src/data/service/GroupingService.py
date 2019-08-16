@@ -1,10 +1,8 @@
-import datetime
-
 from gi.overrides import Gtk
 
 from src.data.model import consts
 from src.data.model.RecordGroup import RecordGroup
-from src.data.model.Types import QuantityTypeInfo
+from src.data.model.Types import QuantityTypeInfo, CalcType
 
 
 class GroupingService:
@@ -32,6 +30,11 @@ class GroupingService:
                     groups[record.type].name = str(record.type.name).replace('_', ' ').lower().title()
                     groups[record.type].description = "Missing type info: description " + str(record.type.name)
 
+            calc_type = CalcType.SUM
+            try:
+                calc_type = QuantityTypeInfo.info[record.type]['type']
+            except KeyError:
+                pass
             groups[record.type].total += record.value
             groups[record.type].records.append(record)
 

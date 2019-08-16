@@ -16,19 +16,19 @@ def _create_session():
     session = sessionmaker(bind=engine)
     RecordBase.metadata.create_all(engine)
     MeBase.metadata.create_all(engine)
-    return session()
+    return session
 
 
 class TestGroupingService(TestCase):
 
     def test_sum_groups(self):
-        records_sqlite_repo = RecordsSqliteRepository(_create_session())
-        records = records_sqlite_repo.find_most_recent()
-        groups = GroupingService.for_records(records)
-        self.assertTrue(len(groups) > 0)
+        with RecordsSqliteRepository(_create_session()) as records_sqlite_repo:
+            records = records_sqlite_repo.find_most_recent()
+            groups = GroupingService.for_records(records)
+            self.assertTrue(len(groups) > 0)
 
     def test_sum_groups_list_store(self):
-        records_sqlite_repo = RecordsSqliteRepository(_create_session())
-        records = records_sqlite_repo.find_most_recent()
-        groups = GroupingService.for_records_as_list_store(records)
-        self.assertTrue(len(groups) > 0)
+        with RecordsSqliteRepository(_create_session()) as records_sqlite_repo:
+            records = records_sqlite_repo.find_most_recent()
+            groups = GroupingService.for_records_as_list_store(records)
+            self.assertTrue(len(groups) > 0)

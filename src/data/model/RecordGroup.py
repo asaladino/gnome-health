@@ -1,6 +1,3 @@
-from gi.overrides import GObject
-
-
 class RecordGroup:
     total = 0
     unit = ''
