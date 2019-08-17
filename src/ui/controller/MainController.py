@@ -19,7 +19,6 @@ import threading
 
 from gi.repository import Gtk, GLib
 
-from src.data.model.RecordGroup import RecordGroup
 from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
 from src.data.service.GroupingService import GroupingService
 from src.ui.controller.HealthTypeTemplateRow import HealthTypeTemplateRow
