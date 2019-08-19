@@ -23,6 +23,7 @@ class GroupingService:
                 groups[record.type].unit = record.unit
                 groups[record.type].type = record.type
                 groups[record.type].end = record.end
+                groups[record.type].records = []
                 try:
                     groups[record.type].name = QuantityTypeInfo.info[record.type]['name']
                     groups[record.type].description = QuantityTypeInfo.info[record.type]['description']
@@ -30,13 +31,18 @@ class GroupingService:
                     groups[record.type].name = str(record.type.name).replace('_', ' ').lower().title()
                     groups[record.type].description = "Missing type info: description " + str(record.type.name)
 
-            calc_type = CalcType.SUM
-            try:
-                calc_type = QuantityTypeInfo.info[record.type]['type']
-            except KeyError:
-                pass
             groups[record.type].total += record.value
             groups[record.type].records.append(record)
+
+        # Handle aggregate operations on groups
+        for record_type in groups:
+            calc_type = CalcType.SUM
+            try:
+                calc_type = QuantityTypeInfo.info[record_type]['calc']
+            except KeyError:
+                pass
+            if calc_type == CalcType.AVERAGE and len(groups[record_type].records) > 0:
+                groups[record_type].total = groups[record_type].total / len(groups[record_type].records)
 
         return groups
 
