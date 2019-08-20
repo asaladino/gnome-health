@@ -460,6 +460,27 @@ class QuantityTypeInfo:
         'name': 'Height',
         'description': 'A quantity sample type that measures the user’s height.'
     }
+
+    info[QuantityType.BODY_MASS] = {
+        'name': 'Body Mass',
+        'description': 'A quantity sample type that measures the user’s weight.',
+    }
+
+    info[QuantityType.BODY_MASS_INDEX] = {
+        'name': 'Body Mass Index',
+        'description': 'A quantity sample type that measures the user’s body mass index.',
+    }
+
+    info[QuantityType.LEAN_BODY_MASS] = {
+        'name': 'Lean Body Mass',
+        'description': 'A quantity sample type that measures the user’s lean body mass.',
+    }
+
+    info[QuantityType.BODY_FAT_PERCENTAGE] = {
+        'name': 'Body Fat Percentage',
+        'description': 'A quantity sample type that measures the user’s body fat percentage.',
+    }
+
     info[QuantityType.HEART_RATE] = {
         'name': 'Heart Rate',
         'description': 'A quantity sample type that measures the user’s heart rate.',
