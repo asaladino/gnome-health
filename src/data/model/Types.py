@@ -481,11 +481,65 @@ class QuantityTypeInfo:
         'description': 'A quantity sample type that measures the user’s body fat percentage.',
     }
 
+    info[QuantityType.WAIST_CIRCUMFERENCE] = {
+        'name': 'Wait Circumference',
+        'description': 'A quantity sample type that measures the user’s waist circumference.',
+    }
+
+    """
+    Vital Signs
+    """
     info[QuantityType.HEART_RATE] = {
         'name': 'Heart Rate',
         'description': 'A quantity sample type that measures the user’s heart rate.',
         'calc': CalcType.AVERAGE
     }
+
+    info[QuantityType.RESTING_HEART_RATE] = {
+        'name': 'Resting Heart Rate',
+        'description': 'A quantity sample type that measures the user’s resting heart rate.',
+    }
+
+    info[QuantityType.WALKING_HEART_RATE_AVERAGE] = {
+        'name': 'Walking Heart Rate Average',
+        'description': 'A quantity sample type that measures the user’s heart rate while walking.',
+    }
+
+    info[QuantityType.HEART_RATE_VARIABILITY_SDNN] = {
+        'name': 'Heart Rate Variability SDNN',
+        'description': 'A quantity sample type that measures the standard deviation of heartbeat intervals.',
+    }
+
+    info[QuantityType.OXYGEN_SATURATION] = {
+        'name': 'Oxygen Saturation',
+        'description': 'A quantity sample type that measures the user’s oxygen saturation.',
+    }
+
+    info[QuantityType.BODY_TEMPERATURE] = {
+        'name': 'Body Temperature',
+        'description': 'A quantity sample type that measures the user’s body temperature.',
+    }
+
+    info[QuantityType.BLOOD_PRESSURE_DIASTOLIC] = {
+        'name': 'Blood Pressure Diastolic',
+        'description': 'A quantity sample type that measures the user’s diastolic blood pressure.',
+    }
+
+    info[QuantityType.BLOOD_PRESSURE_SYSTOLIC] = {
+        'name': 'Blood Pressure Systolic',
+        'description': 'A quantity sample type that measures the user’s systolic blood pressure.',
+    }
+
+    info[QuantityType.RESPIRATORY_RATE] = {
+        'name': 'Respiratory Rate',
+        'description': 'A quantity sample type that measures the user’s respiratory rate.',
+    }
+
+    info[QuantityType.VO2_MAX] = {
+        'name': 'VO2 Max',
+        'description': 'A quantity sample that measures the maximal oxygen consumption during incremental exercise.',
+    }
+
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',
         'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'
