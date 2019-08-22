@@ -540,6 +540,60 @@ class QuantityTypeInfo:
         'description': 'A quantity sample that measures the maximal oxygen consumption during incremental exercise.',
     }
 
+    """
+    Lab and Test Results
+    """
+
+    info[QuantityType.BLOOD_ALCOHOL_CONTENT] = {
+        'name': 'Blood Alcohol Content',
+        'description': 'A quantity sample type that measures the user’s blood alcohol content.',
+    }
+
+    info[QuantityType.BLOOD_GLUCOSE] = {
+        'name': 'Blood Glucose',
+        'description': 'A quantity sample type that measures the user’s blood glucose level.',
+    }
+
+    info[QuantityType.ELECTRODERMAL_ACTIVITY] = {
+        'name': 'Electrodermal Activity',
+        'description': 'A quantity sample type that measures electrodermal activity.',
+    }
+
+    info[QuantityType.FORCED_EXPIRATORY_VOLUME_1] = {
+        'name': 'Forced Expiratory Volume 1',
+        'description': 'A quantity sample type that measures the amount of air that can be forcibly exhaled from the lungs during the first second of a forced exhalation.',
+    }
+
+    info[QuantityType.FORCED_VITAL_CAPACITY] = {
+        'name': 'Forced Vital Capacity',
+        'description': 'A quantity sample type that measures the amount of air that can be forcibly exhaled from the lungs after taking the deepest breath possible.',
+    }
+
+    info[QuantityType.INHALER_USAGE] = {
+        'name': 'Inhaler Usage',
+        'description': 'A quantity sample type that measures the number of puffs the user takes from their inhaler.',
+    }
+
+    info[QuantityType.INSULIN_DELIVERY] = {
+        'name': 'Insulin Delivery',
+        'description': 'A quantity sample that measures the amount of insulin delivered.',
+    }
+
+    info[QuantityType.NUMBER_OF_TIMES_FALLEN] = {
+        'name': 'Number Of Times Fallen',
+        'description': 'A quantity sample type that measures the number of times the user has fallen.',
+    }
+
+    info[QuantityType.PEAK_EXPIRATORY_FLOW_RATE] = {
+        'name': 'Peak Expiratory Flow Rate',
+        'description': 'A quantity sample type that measures the user’s maximum flow rate generated during a forceful exhalation.',
+    }
+
+    info[QuantityType.PERIPHERAL_PERFUSION_INDEX] = {
+        'name': 'Peripheral Perfusion Index',
+        'description': 'A quantity sample type that measures the user’s peripheral perfusion index.',
+    }
+
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',
         'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'
