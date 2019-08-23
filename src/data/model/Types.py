@@ -594,6 +594,204 @@ class QuantityTypeInfo:
         'description': 'A quantity sample type that measures the user’s peripheral perfusion index.',
     }
 
+    """
+    Nutrition
+    """
+    info[QuantityType.DIETARY_BIOTIN] = {
+        'name': 'Dietary Biotin',
+        'description': 'A quantity sample type that measures the amount of biotin (vitamin B7) consumed.',
+    }
+
+    info[QuantityType.DIETARY_CAFFEINE] = {
+        'name': 'Dietary Caffeine',
+        'description': 'A quantity sample type that measures the amount of caffeine consumed.',
+    }
+
+    info[QuantityType.DIETARY_CALCIUM] = {
+        'name': 'Dietary Calcium = 28',
+        'description': 'A quantity sample type that measures the amount of calcium consumed.',
+    }
+
+    info[QuantityType.DIETARY_CARBOHYDRATES] = {
+        'name': 'Dietary Carbohydrates',
+        'description': 'A quantity sample type that measures the amount of carbohydrates consumed.',
+    }
+
+    info[QuantityType.DIETARY_CHLORIDE] = {
+        'name': 'Dietary Chloride',
+        'description': 'A quantity sample type that measures the amount of chloride consumed.',
+    }
+
+    info[QuantityType.DIETARY_CHOLESTEROL] = {
+        'name': 'Dietary Cholesterol',
+        'description': 'A quantity sample type that measures the amount of cholesterol consumed.',
+    }
+
+    info[QuantityType.DIETARY_CHROMIUM] = {
+        'name': 'Dietary Chromium',
+        'description': 'A quantity sample type that measures the amount of chromium consumed.',
+    }
+
+    info[QuantityType.DIETARY_COPPER] = {
+        'name': 'Dietary Copper',
+        'description': 'A quantity sample type that measures the amount of copper consumed.',
+    }
+
+    info[QuantityType.DIETARY_ENERGY_CONSUMED] = {
+        'name': 'Dietary Energy Consumed',
+        'description': 'A quantity sample type that measures the amount of energy consumed.',
+    }
+
+    info[QuantityType.DIETARY_FAT_MONOUNSATURATED] = {
+        'name': 'Dietary Fat Monounsaturated',
+        'description': 'A quantity sample type that measures the amount of monounsaturated fat consumed.',
+    }
+
+    info[QuantityType.DIETARY_FAT_POLYUNSATURATED] = {
+        'name': 'Dietary Fat Polyunsaturated',
+        'description': 'A quantity sample type that measures the amount of polyunsaturated fat consumed.',
+    }
+
+    info[QuantityType.DIETARY_FAT_SATURATED] = {
+        'name': 'Dietary Fat Saturated',
+        'description': 'A quantity sample type that measures the amount of saturated fat consumed.',
+    }
+
+    info[QuantityType.DIETARY_FAT_TOTAL] = {
+        'name': 'Dietary Fat Total',
+        'description': 'A quantity sample type that measures the total amount of fat consumed.',
+    }
+
+    info[QuantityType.DIETARY_FIBER] = {
+        'name': 'Dietary Fiber',
+        'description': 'A quantity sample type that measures the amount of fiber consumed.',
+    }
+
+    info[QuantityType.DIETARY_FOLATE] = {
+        'name': 'Dietary Folate',
+        'description': 'A quantity sample type that measures the amount of folate (folic acid) consumed.',
+    }
+
+    info[QuantityType.DIETARY_IODINE] = {
+        'name': 'Dietary Iodine',
+        'description': 'A quantity sample type that measures the amount of iodine consumed.',
+    }
+
+    info[QuantityType.DIETARY_IRON] = {
+        'name': 'Dietary Iron = 42',
+        'description': 'A quantity sample type that measures the amount of iron consumed.',
+    }
+
+    info[QuantityType.DIETARY_MAGNESIUM] = {
+        'name': 'Dietary Magnesium = 43',
+        'description': 'A quantity sample type that measures the amount of magnesium consumed.',
+    }
+
+    info[QuantityType.DIETARY_MANGANESE] = {
+        'name': 'Dietary Manganese',
+        'description': 'A quantity sample type that measures the amount of manganese consumed.',
+    }
+
+    info[QuantityType.DIETARY_MOLYBDENUM] = {
+        'name': 'Dietary Molybdenum',
+        'description': 'A quantity sample type that measures the amount of molybdenum consumed.',
+    }
+
+    info[QuantityType.DIETARY_NIACIN] = {
+        'name': 'Dietary Niacin',
+        'description': 'A quantity sample type that measures the amount of niacin (vitamin B3) consumed.',
+    }
+
+    info[QuantityType.DIETARY_PANTOTHENIC_ACID] = {
+        'name': 'Dietary Pantothenic Acid',
+        'description': 'A quantity sample type that measures the amount of pantothenic acid (vitamin B5) consumed.',
+    }
+
+    info[QuantityType.DIETARY_PHOSPHORUS] = {
+        'name': 'Dietary Phosphorus',
+        'description': 'A quantity sample type that measures the amount of phosphorus consumed.',
+    }
+
+    info[QuantityType.DIETARY_POTASSIUM] = {
+        'name': 'Dietary Potassium',
+        'description': 'A quantity sample type that measures the amount of potassium consumed.',
+    }
+
+    info[QuantityType.DIETARY_PROTEIN] = {
+        'name': 'Dietary Protein',
+        'description': 'A quantity sample type that measures the amount of protein consumed.',
+    }
+
+    info[QuantityType.DIETARY_RIBOFLAVIN] = {
+        'name': 'Dietary Riboflavin',
+        'description': 'A quantity sample type that measures the amount of riboflavin (vitamin B2) consumed.',
+    }
+
+    info[QuantityType.DIETARY_SELENIUM] = {
+        'name': 'Dietary Selenium',
+        'description': 'A quantity sample type that measures the amount of selenium consumed.',
+    }
+
+    info[QuantityType.DIETARY_SODIUM] = {
+        'name': 'Dietary Sodium',
+        'description': 'A quantity sample type that measures the amount of sodium consumed.',
+    }
+
+    info[QuantityType.DIETARY_SUGAR] = {
+        'name': 'Dietary Sugar',
+        'description': 'A quantity sample type that measures the amount of sugar consumed.',
+    }
+
+    info[QuantityType.DIETARY_THIAMIN] = {
+        'name': 'Dietary Thiamin',
+        'description': 'A quantity sample type that measures the amount of thiamin (vitamin B1) consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_A] = {
+        'name': 'Dietary Vitamin A',
+        'description': 'A quantity sample type that measures the amount of vitamin A consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_B12] = {
+        'name': 'Dietary Vitamin B12',
+        'description': 'A quantity sample type that measures the amount of cyanocobalamin (vitamin B12) consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_B6] = {
+        'name': 'Dietary Vitamin B6',
+        'description': 'A quantity sample type that measures the amount of pyridoxine (vitamin B6) consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_C] = {
+        'name': 'Dietary Vitamin C',
+        'description': 'A quantity sample type that measures the amount of vitamin C consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_D] = {
+        'name': 'Dietary Vitamin D',
+        'description': 'A quantity sample type that measures the amount of vitamin D consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_E] = {
+        'name': 'Dietary Vitamin E',
+        'description': 'A quantity sample type that measures the amount of vitamin E consumed.',
+    }
+
+    info[QuantityType.DIETARY_VITAMIN_K] = {
+        'name': 'Dietary Vitamin K',
+        'description': 'A quantity sample type that measures the amount of vitamin K consumed.',
+    }
+
+    info[QuantityType.DIETARY_WATER] = {
+        'name': 'Dietary Water',
+        'description': 'A quantity sample type that measures the amount of water consumed.',
+    }
+
+    info[QuantityType.DIETARY_ZINC] = {
+        'name': 'Dietary Zinc',
+        'description': 'A quantity sample type that measures the amount of zinc consumed.',
+    }
+
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',
         'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'
