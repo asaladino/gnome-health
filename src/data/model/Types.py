@@ -456,6 +456,10 @@ class CalcType(Enum):
 
 class QuantityTypeInfo:
     info = dict()
+
+    """
+    Body Measurements
+    """
     info[QuantityType.HEIGHT] = {
         'name': 'Height',
         'description': 'A quantity sample type that measures the user’s height.'
@@ -543,7 +547,6 @@ class QuantityTypeInfo:
     """
     Lab and Test Results
     """
-
     info[QuantityType.BLOOD_ALCOHOL_CONTENT] = {
         'name': 'Blood Alcohol Content',
         'description': 'A quantity sample type that measures the user’s blood alcohol content.',
@@ -792,11 +795,104 @@ class QuantityTypeInfo:
         'description': 'A quantity sample type that measures the amount of zinc consumed.',
     }
 
+    """
+    Activity
+    """
+    info[QuantityType.STEP_COUNT] = {
+        'name': 'Step Count',
+        'description': 'A quantity sample type that measures the number of steps the user has taken.'
+    }
+
     info[QuantityType.DISTANCE_WALKING_RUNNING] = {
         'name': 'Distance Walking Running',
         'description': 'A quantity sample type that measures the distance the user has moved by walking or running.'
     }
-    info[QuantityType.STEP_COUNT] = {
-        'name': 'Step Count',
-        'description': 'A quantity sample type that measures the number of steps the user has taken.'
+
+    info[QuantityType.DISTANCE_CYCLING] = {
+        'name': 'Distance Cycling',
+        # A quantity sample type that measures the distance the user has moved by cycling.',
+    }
+
+    info[QuantityType.PUSH_COUNT] = {
+        'name': 'Push Count',
+        'description': 'A quantity sample type that measures the number of pushes that the user has performed while using a wheelchair.',
+    }
+
+    info[QuantityType.DISTANCE_WHEELCHAIR] = {
+        'name': 'Distance Wheelchair',
+        'description': 'A quantity sample type that measures the distance the user has moved using a wheelchair.',
+    }
+
+    info[QuantityType.SWIMMING_STROKE_COUNT] = {
+        'name': 'Swimming Stroke Count',
+        'description': 'A quantity sample type that measures the number of strokes performed while swimming.',
+    }
+
+    info[QuantityType.DISTANCE_SWIMMING] = {
+        'name': 'Distance Swimming',
+        'description': 'A quantity sample type that measures the distance the user has moved while swimming.',
+    }
+
+    info[QuantityType.DISTANCE_DOWNHILL_SNOW_SPORTS] = {
+        'name': 'Distance Downhill Snow Sports',
+        'description': 'A quantity sample type that measures the distance the user has traveled while skiing or snowboarding.',
+    }
+
+    info[QuantityType.BASAL_ENERGY_BURNED] = {
+        'name': 'Basal Energy Burned',
+        'description': 'A quantity sample type that measures the resting energy burned by the user.',
+    }
+
+    info[QuantityType.ACTIVE_ENERGY_BURNED] = {
+        'name': 'Active Energy Burned',
+        'description': 'A quantity sample type that measures the amount of active energy the user has burned.',
+    }
+
+    info[QuantityType.FLIGHTS_CLIMBED] = {
+        'name': 'Flights Climbed',
+        'description': 'A quantity sample type that measures the number flights of stairs that the user has climbed.',
+    }
+
+    info[QuantityType.NIKE_FUEL] = {
+        'name': 'Nike Fuel',
+        'description': 'A quantity sample type that measures the number of NikeFuel points the user has earned.',
+    }
+
+    info[QuantityType.APPLE_EXERCISE_TIME] = {
+        'name': 'Apple Exercise Time',
+        'description': 'A quantity sample type that measures the amount of time the user spent exercising.',
+    }
+
+    info[QuantityType.APPLE_STAND_TIME] = {
+        'name': 'Apple Stand Time',
+        'description': 'A quantity sample type that measures the amount of time the user has spent standing.',
+    }
+
+    """
+    Reproductive Health
+    """
+    info[QuantityType.BASAL_BODY_TEMPERATURE] = {
+        'name': 'Basal Body Temperature',
+        'description': 'A quantity sample type that measures the user’s basal body temperature.',
+    }
+
+    """
+    UV Exposure
+    """
+    info[QuantityType.UV_EXPOSURE] = {
+        'name': 'UV Exposure',
+        'description': 'A quantity sample type that measures the user’s exposure to UV radiation.',
+    }
+
+    """
+    Audio Exposure
+    """
+    info[QuantityType.ENVIRONMENTAL_AUDIO_EXPOSURE] = {
+        'name': 'Environmental Audio Exposure',
+        'description': 'A quantity sample type that measures audio exposure to sounds in the environment.',
+    }
+
+    info[QuantityType.HEADPHONE_AUDIO_EXPOSURE] = {
+        'name': 'Headphone Audio Exposure',
+        'description': 'A quantity sample type that measures audio exposure from headphones.',
     }
