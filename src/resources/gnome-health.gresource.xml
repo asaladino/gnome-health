@@ -3,6 +3,7 @@
   <gresource prefix="/com/codingsimply/gnome/health">
     <file>window.ui</file>
     <file>import_dialog.ui</file>
+    <file>add_dialog.ui</file>
     <file>health_type_template_row.ui</file>
   </gresource>
 </gresources>

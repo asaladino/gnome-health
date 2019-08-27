@@ -23,6 +23,7 @@ from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
 from src.data.service.GroupingService import GroupingService
 from src.ui.controller.HealthTypeTemplateRow import HealthTypeTemplateRow
 from src.ui.controller.ImportDialogController import ImportDialogController
+from src.ui.controller.AddDialogController import AddDialogController
 from src.utility.DbSession import create_session
 
 
@@ -47,8 +48,10 @@ class MainController(Gtk.ApplicationWindow):
 
     appCloseButton = Gtk.Template.Child()
     importButton = Gtk.Template.Child()
+    addButton = Gtk.Template.Child()
 
     importDialog = None
+    addDialog = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -56,6 +59,7 @@ class MainController(Gtk.ApplicationWindow):
         self.calendar.connect('day-selected', self.change_selected_day)
         self.appCloseButton.connect('clicked', self.app_close)
         self.importButton.connect('clicked', self.import_dialog_open)
+        self.addButton.connect('clicked', self.add_dialog_open)
 
         self.prevDayButton.connect('clicked', self.prev_day)
         self.todayButton.connect('clicked', self.today)
@@ -135,6 +139,12 @@ class MainController(Gtk.ApplicationWindow):
         if self.importDialog is None:
             self.importDialog = ImportDialogController()
         self.importDialog.show()
+
+    # noinspection PyUnusedLocal
+    def add_dialog_open(self, widget):
+        if self.addDialog is None:
+            self.addDialog = AddDialogController()
+        self.addDialog.show()
 
     # noinspection PyUnusedLocal
     @staticmethod
