@@ -611,7 +611,7 @@ class QuantityTypeInfo:
     }
 
     info[QuantityType.DIETARY_CALCIUM] = {
-        'name': 'Dietary Calcium = 28',
+        'name': 'Dietary Calcium',
         'description': 'A quantity sample type that measures the amount of calcium consumed.',
     }
 
