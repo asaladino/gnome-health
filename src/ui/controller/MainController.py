@@ -67,7 +67,9 @@ class MainController(Gtk.ApplicationWindow):
         self.nextDayButton.connect('clicked', self.next_day)
 
         with RecordsSqliteRepository(create_session()) as repo:
-            self.selectedDate = repo.find_most_recent_date()
+            most_recent_date = repo.find_most_recent_date()
+            if most_recent_date is not None:
+                self.selectedDate = most_recent_date
 
         self.calendar.select_month(self.selectedDate.month - 1, self.selectedDate.year)
         self.calendar.select_day(self.selectedDate.day)
