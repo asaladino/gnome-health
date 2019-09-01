@@ -66,6 +66,7 @@ class RecordsSqliteRepository:
         :return: Record
         """
         self.session.add(record)
+        self.session.commit()
         self.session.flush()
         return record
 

@@ -1,9 +1,13 @@
+import datetime
+
 from gi.repository import Gtk, GLib
 
 # noinspection PyUnresolvedReferences-
 from src.data.model import Types
 from src.data.model.Record import Record
 from src.data.model.Types import QuantityTypeInfo, QuantityType
+from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
+from src.utility.DbSession import create_session
 
 
 @Gtk.Template(resource_path='/com/codingsimply/gnome/health/add_dialog.ui')
@@ -49,8 +53,15 @@ class AddDialogController(Gtk.Dialog):
     # noinspection PyUnusedLocal
     def save(self, widget):
         record = Record()
-        record.type = self.selected_type
+        for qt in QuantityType:
+            if qt.value == self.selected_type:
+                record.type = qt
+                break
+        record.value = float(self.valueEntry.get_text())
         record.unit = self.unitsEntry.get_text()
-        record.created = self.dateCalendar.get_date()
-        print(record)
+        the_date = self.dateCalendar.get_date()
+        record.created = datetime.date(year=the_date.year, month=the_date.month + 1, day=the_date.day)
+        with RecordsSqliteRepository(create_session()) as repo:
+            r = repo.save(record)
+            print(r)
         self.hide()

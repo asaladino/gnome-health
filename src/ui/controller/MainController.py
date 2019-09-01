@@ -84,8 +84,9 @@ class MainController(Gtk.ApplicationWindow):
     def most_recent(self, widget):
         with RecordsSqliteRepository(create_session()) as repo:
             the_date = repo.find_most_recent_date()
-        self.calendar.select_month(the_date.month - 1, the_date.year)
-        self.calendar.select_day(the_date.day)
+        if the_date is not None:
+            self.calendar.select_month(the_date.month - 1, the_date.year)
+            self.calendar.select_day(the_date.day)
 
     # noinspection PyUnusedLocal
     def today(self, widget):
