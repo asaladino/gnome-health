@@ -38,6 +38,20 @@ class Record(Base):
         hash_value = ''.join(str(x) for x in props_to_use).encode()
         self.hash = hashlib.sha3_224(hash_value).hexdigest()
 
+    @staticmethod
+    def build(quantity_type, value, unit, the_date):
+        record = Record()
+        record.value = value
+        record.type = quantity_type
+        record.unit = unit
+        record.created = datetime(year=the_date.year, month=the_date.month + 1, day=the_date.day)
+        record.start = datetime(year=the_date.year, month=the_date.month + 1, day=the_date.day)
+        record.end = datetime(year=the_date.year, month=the_date.month + 1, day=the_date.day)
+        record.source_name = 'Health'
+        record.source_version = '1.0.0'
+        record.set_hash()
+        return record
+
     def copy_from_object(self, obj):
         for att in obj.__dict__:
             self.__setattr__(att, obj.__getattribute__(att))

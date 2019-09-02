@@ -74,28 +74,24 @@ class MainController(Gtk.ApplicationWindow):
         self.calendar.select_month(self.selectedDate.month - 1, self.selectedDate.year)
         self.calendar.select_day(self.selectedDate.day)
 
-    # noinspection PyUnusedLocal
-    def prev_day(self, widget):
+    def prev_day(self, _):
         the_date = self.selectedDate + datetime.timedelta(days=-1)
         self.calendar.select_month(the_date.month - 1, the_date.year)
         self.calendar.select_day(the_date.day)
 
-    # noinspection PyUnusedLocal
-    def most_recent(self, widget):
+    def most_recent(self, _):
         with RecordsSqliteRepository(create_session()) as repo:
             the_date = repo.find_most_recent_date()
         if the_date is not None:
             self.calendar.select_month(the_date.month - 1, the_date.year)
             self.calendar.select_day(the_date.day)
 
-    # noinspection PyUnusedLocal
-    def today(self, widget):
+    def today(self, _):
         the_date = datetime.datetime.now()
         self.calendar.select_month(the_date.month - 1, the_date.year)
         self.calendar.select_day(the_date.day)
 
-    # noinspection PyUnusedLocal
-    def next_day(self, widget):
+    def next_day(self, _):
         the_date = self.selectedDate + datetime.timedelta(days=1)
         self.calendar.select_month(the_date.month - 1, the_date.year)
         self.calendar.select_day(the_date.day)
@@ -137,19 +133,16 @@ class MainController(Gtk.ApplicationWindow):
     def show_date(self):
         self.headerBar.set_subtitle(self.selectedDate.strftime('%b %d, %Y'))
 
-    # noinspection PyUnusedLocal
-    def import_dialog_open(self, widget):
+    def import_dialog_open(self, _):
         if self.importDialog is None:
             self.importDialog = ImportDialogController()
         self.importDialog.show()
 
-    # noinspection PyUnusedLocal
-    def add_dialog_open(self, widget):
+    def add_dialog_open(self, _):
         if self.addDialog is None:
             self.addDialog = AddDialogController()
         self.addDialog.show()
 
-    # noinspection PyUnusedLocal
     @staticmethod
-    def app_close(widget):
+    def app_close(_):
         Gtk.main_quit()

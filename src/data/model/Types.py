@@ -91,6 +91,12 @@ class QuantityType(Enum):
     Used to define the identifiers that create quantity type objects.
     """
 
+    @staticmethod
+    def find(type_id):
+        for qt in QuantityType:
+            if qt.value == type_id:
+                return qt
+
     """
     Body Measurements
     """

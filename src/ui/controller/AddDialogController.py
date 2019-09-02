@@ -1,9 +1,5 @@
-import datetime
+from gi.repository import Gtk
 
-from gi.repository import Gtk, GLib
-
-# noinspection PyUnresolvedReferences-
-from src.data.model import Types
 from src.data.model.Record import Record
 from src.data.model.Types import QuantityTypeInfo, QuantityType
 from src.data.repository.RecordsSqliteRepository import RecordsSqliteRepository
@@ -42,26 +38,15 @@ class AddDialogController(Gtk.Dialog):
         if tree_iter is not None:
             model = combo.get_model()
             self.selected_type, name = model[tree_iter][:2]
-        # else:
-        #     entry = combo.get_child()
-        #     print("Entered: %s" % entry.get_text())
 
-    # noinspection PyUnusedLocal
-    def dialog_close(self, widget):
+    def dialog_close(self, _):
         self.hide()
 
-    # noinspection PyUnusedLocal
-    def save(self, widget):
-        record = Record()
-        for qt in QuantityType:
-            if qt.value == self.selected_type:
-                record.type = qt
-                break
-        record.value = float(self.valueEntry.get_text())
-        record.unit = self.unitsEntry.get_text()
-        the_date = self.dateCalendar.get_date()
-        record.created = datetime.date(year=the_date.year, month=the_date.month + 1, day=the_date.day)
+    def save(self, _):
+        record = Record.build(QuantityType.find(self.selected_type),
+                              float(self.valueEntry.get_text()),
+                              self.unitsEntry.get_text(),
+                              self.dateCalendar.get_date())
         with RecordsSqliteRepository(create_session()) as repo:
-            r = repo.save(record)
-            print(r)
+            repo.save(record)
         self.hide()
