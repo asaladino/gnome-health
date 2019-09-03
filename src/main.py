@@ -4,6 +4,10 @@ import gi
 
 from os.path import abspath, join, dirname
 
+from pydbus import SessionBus
+
+from src.data.service.RecordsDBusService import RecordsDBusService
+
 gi.require_version('Gtk', '3.0')
 script_dir = dirname(abspath(__file__))
 
@@ -17,7 +21,7 @@ resource = Gio.resource_load(join(script_dir, add_src, 'resources', 'gnome-healt
 # noinspection PyProtectedMember
 Gio.Resource._register(resource)
 
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 from src.ui.controller.MainController import MainController
 
 
@@ -27,6 +31,11 @@ def run_app():
     window.connect('delete-event', Gtk.main_quit)
     window.show_all()
     Gtk.main()
+
+    loop = GLib.MainLoop()
+    bus = SessionBus()
+    bus.publish("com.codingsimply.Health", RecordsDBusService())
+    loop.run()
 
 
 if __name__ == '__main__':

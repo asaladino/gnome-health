@@ -42,11 +42,11 @@ Instructions on packaging an app for snap.
 
 https://docs.snapcraft.io/python-apps
 
-### SQL Alchemy
+## SQL Alchemy
 Documentation.
 
 https://docs.sqlalchemy.org/en/13/orm/tutorial.html
 
-### Case Converter
+## Case Converter
 Works pretty well.
 https://convertcase.net/
