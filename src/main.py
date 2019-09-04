@@ -4,7 +4,7 @@ import gi
 
 from os.path import abspath, join, dirname
 
-from pydbus import SessionBus
+from pydbus import SessionBus, SystemBus
 
 from src.data.service.RecordsDBusService import RecordsDBusService
 
@@ -25,17 +25,18 @@ from gi.repository import Gtk, GLib
 from src.ui.controller.MainController import MainController
 
 
+def start_bus():
+    bus = SessionBus()
+    bus.publish("com.codingsimply.Health", RecordsDBusService())
+
+
 def run_app():
+    start_bus()
     window = MainController()
     window.set_wmclass("Health", "Health")
     window.connect('delete-event', Gtk.main_quit)
     window.show_all()
     Gtk.main()
-
-    loop = GLib.MainLoop()
-    bus = SessionBus()
-    bus.publish("com.codingsimply.Health", RecordsDBusService())
-    loop.run()
 
 
 if __name__ == '__main__':
