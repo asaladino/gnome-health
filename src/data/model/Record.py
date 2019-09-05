@@ -52,6 +52,38 @@ class Record(Base):
         record.set_hash()
         return record
 
+    @staticmethod
+    def build_from_dict(record_dict):
+        record = Record()
+        if 'value' in record_dict:
+            record.value = record_dict['value']
+        if 'type' in record_dict:
+            record.type = QuantityType.find(record_dict['type'])
+        if 'unit' in record_dict:
+            record.unit = record_dict['unit']
+
+        if 'created' in record_dict:
+            record.set_created(record_dict['created'])
+        else:
+            record.created = datetime.now()
+
+        if 'start' in record_dict:
+            record.set_start(record_dict['start'])
+        else:
+            record.start = datetime.now()
+
+        if 'end' in record_dict:
+            record.set_end(record_dict['end'])
+        else:
+            record.end = datetime.now()
+
+        if 'source_name' in record_dict:
+            record.source_name = record_dict['source_name']
+        if 'source_version' in record_dict:
+            record.source_version = record_dict['source_version']
+        record.set_hash()
+        return record
+
     def copy_from_object(self, obj):
         for att in obj.__dict__:
             self.__setattr__(att, obj.__getattribute__(att))
